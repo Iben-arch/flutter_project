@@ -1,10 +1,15 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:modern_profile/constant/constant.dart';
 
 class ProfileMenu extends StatelessWidget {
+  final String title;
+  final IconData icons;
   const ProfileMenu({
-    super.key,
-  });
+    Key? key,
+    required this.title,
+    required this.icons,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -12,11 +17,12 @@ class ProfileMenu extends StatelessWidget {
       width: 250,
       height: 40,
       child: Row(
+        // mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          const CircleAvatar(
+          CircleAvatar(
             backgroundColor: bgSecondaryColor,
             child: Icon(
-              Icons.settings,
+              icons,
               size: 24,
               color: iconPrimaryColor,
             ),
@@ -25,12 +31,13 @@ class ProfileMenu extends StatelessWidget {
             width: 15,
           ),
           Text(
-            'Setting',
+            title,
             style: textSubTitle,
           ),
           const SizedBox(
             width: 15,
           ),
+          const Spacer(),
           const CircleAvatar(
             radius: 16,
             backgroundColor: bgSecondaryColor,
