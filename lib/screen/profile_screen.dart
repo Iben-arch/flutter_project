@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:modern_profile/components/profile_img.dart';
 import 'package:modern_profile/components/profile_menu.dart';
 import 'package:modern_profile/constant/constant.dart';
+import 'package:modern_profile/screen/home_screen.dart';
 import 'editprofile_screen.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -22,36 +23,26 @@ class _ProfileScreenState extends State<ProfileScreen> {
   }
 
   final List<Widget> _pages = [
-    Text('Home'),
+    HomePage(),
     Text('Favorite'),
     Text('Setting'),
     EditProfileScreen(),
   ];
 
+  final List<String> _title = ['Home', 'Favorite', 'Setting', 'Editprofile'];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.blue[50],
       appBar: AppBar(
-        leading: const Icon(
-          Icons.arrow_back_ios,
-          size: 20,
-          color: iconPrimaryColor,
+        title: Text(
+          'holoplus',
+          style: TextStyle(fontWeight: FontWeight.bold, color: Colors.blue),
         ),
-        title: Center(
-            child: Text(
-          'Edit Profile',
-          style: textTitle,
-        )),
-        actions: const [
-          Icon(
-            Icons.exit_to_app,
-            size: 25,
-            color: iconPrimaryColor,
-          ),
-          SizedBox(
-            width: 20,
-          )
-        ],
+        backgroundColor: Colors.white,
+        elevation: 0,
+        leading: Icon(Icons.menu, color: Colors.blue),
       ),
       body: _pages[_selectedItem],
       bottomNavigationBar: BottomNavigationBar(
@@ -64,11 +55,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 Icons.home,
               ),
               label: 'Home'),
+          BottomNavigationBarItem(icon: Icon(Icons.chat), label: 'Community'),
           BottomNavigationBarItem(
-              icon: Icon(Icons.favorite), label: 'Favorite'),
-          BottomNavigationBarItem(icon: Icon(Icons.settings), label: 'Setting'),
+              icon: Icon(Icons.video_collection), label: 'holodule'),
           BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile')
         ],
+        selectedItemColor: Colors.blue,
+        unselectedItemColor: Colors.grey,
       ),
     );
   }
