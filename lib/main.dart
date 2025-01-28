@@ -2,18 +2,19 @@ import 'package:flutter/material.dart';
 import 'screen/profile_screen.dart';
 
 void main(List<String> args) {
-  runApp(const MyApp());
+  runApp(const HoloPlusApp());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class HoloPlusApp extends StatelessWidget {
+  const HoloPlusApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       title: 'Modern Profile 2024',
       debugShowCheckedModeBanner: false,
-      home: ProfileScreen(),
+      theme: ThemeData(primarySwatch: Colors.blue),
+      home: const ProfileScreen(),
     );
   }
 }

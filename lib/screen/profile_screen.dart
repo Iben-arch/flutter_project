@@ -24,12 +24,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   final List<Widget> _pages = [
     const HomePage(),
-    const Text('Favorite'),
-    const Text('Setting'),
+    const Text('Community'),
+    const Text('Holodule'),
     const EditProfileScreen(),
   ];
 
-  final List<String> _title = ['Home', 'Favorite', 'Setting', 'Editprofile'];
+  final List<String> _title = ['Home', 'Community', 'Holodule', 'Profile'];
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +37,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
       backgroundColor: Colors.blue[50],
       appBar: AppBar(
         title: const Text(
-          'holoplus',
+          'holoplus+',
           style: TextStyle(fontWeight: FontWeight.bold, color: Colors.blue),
         ),
         backgroundColor: Colors.white,

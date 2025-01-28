@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import '../components/detail_card.dart';
 import '../components/home_img.dart';
@@ -12,6 +14,35 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   bool isJapanese = false;
   int currentBannerIndex = 0;
+  Timer? _bannerTimer;
+  late PageController _pageController;
+
+  @override
+  void initState() {
+    super.initState();
+    _pageController = PageController(initialPage: currentBannerIndex);
+    _startBannerTimer();
+  }
+
+  @override
+  void dispose() {
+    _bannerTimer?.cancel();
+    _pageController.dispose();
+    super.dispose();
+  }
+
+  void _startBannerTimer() {
+    _bannerTimer = Timer.periodic(const Duration(seconds: 5), (timer) {
+      setState(() {
+        currentBannerIndex = (currentBannerIndex + 1) % bannerData.length;
+        _pageController.animateToPage(
+          currentBannerIndex,
+          duration: const Duration(milliseconds: 300),
+          curve: Curves.easeInOut,
+        );
+      });
+    });
+  }
 
   void toggleLanguage(String? language) {
     setState(() {
@@ -56,13 +87,13 @@ class _HomePageState extends State<HomePage> {
             padding: const EdgeInsets.all(16.0),
             child: Row(
               children: [
-                CircleAvatar(
+                const CircleAvatar(
                   backgroundColor: Colors.blue,
                   child: Icon(Icons.star, color: Colors.white),
                 ),
-                SizedBox(width: 10),
+                const SizedBox(width: 10),
                 Text(isJapanese ? 'レベル 1 | 0+' : 'LV 1 | 0+',
-                    style: TextStyle(fontSize: 16, color: Colors.blue)),
+                    style: const TextStyle(fontSize: 16, color: Colors.blue)),
               ],
             ),
           ),
@@ -78,6 +109,7 @@ class _HomePageState extends State<HomePage> {
                       currentBannerIndex = index;
                     });
                   },
+                  controller: _pageController,
                   itemCount: bannerData.length,
                   itemBuilder: (context, index) {
                     return GestureDetector(
@@ -104,7 +136,7 @@ class _HomePageState extends State<HomePage> {
                     children: List.generate(
                       bannerData.length,
                       (index) => AnimatedContainer(
-                        duration: Duration(milliseconds: 300),
+                        duration: const Duration(milliseconds: 300),
                         margin: const EdgeInsets.symmetric(horizontal: 4.0),
                         width: currentBannerIndex == index ? 12.0 : 8.0,
                         height: 8.0,
@@ -158,10 +190,10 @@ class _HomePageState extends State<HomePage> {
             padding: const EdgeInsets.symmetric(horizontal: 16.0),
             child: Text(
               isJapanese ? '最新ニュース📰' : 'Latest News📰',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
           ),
-          SizedBox(height: 10),
+          const SizedBox(height: 10),
           Container(
             margin: const EdgeInsets.symmetric(horizontal: 16.0),
             padding: const EdgeInsets.all(16.0),
@@ -172,7 +204,7 @@ class _HomePageState extends State<HomePage> {
                 BoxShadow(
                   color: Colors.black.withOpacity(0.1),
                   blurRadius: 10,
-                  offset: Offset(0, 5),
+                  offset: const Offset(0, 5),
                 ),
               ],
             ),
@@ -181,14 +213,14 @@ class _HomePageState extends State<HomePage> {
               children: [
                 Row(
                   children: [
-                    Icon(Icons.new_releases, color: Colors.orange),
-                    SizedBox(width: 8),
+                    const Icon(Icons.new_releases, color: Colors.orange),
+                    const SizedBox(width: 8),
                     Expanded(
                       child: Text(
                         isJapanese
                             ? '新しいホロライブのマインクラフトサーバー'
                             : 'New hololive Minecraft Server',
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
                         ),
@@ -196,22 +228,22 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ],
                 ),
-                SizedBox(height: 8),
+                const SizedBox(height: 8),
                 Text(
                   isJapanese
                       ? 'ホロライブ専用の新しいサーバー...'
                       : 'A brand new server exclusively for hololive...',
-                  style: TextStyle(color: Colors.grey),
+                  style: const TextStyle(color: Colors.grey),
                 ),
-                SizedBox(height: 10),
+                const SizedBox(height: 10),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
                       isJapanese ? 'わあ、楽しみ〜〜〜' : 'wow, I can\'t wait to see~~~',
-                      style: TextStyle(fontStyle: FontStyle.italic),
+                      style: const TextStyle(fontStyle: FontStyle.italic),
                     ),
-                    Row(
+                    const Row(
                       children: [
                         Icon(Icons.favorite, color: Colors.red),
                         SizedBox(width: 5),
@@ -224,17 +256,17 @@ class _HomePageState extends State<HomePage> {
             ),
           ),
 
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
 
           // Featured Section
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16.0),
             child: Text(
               isJapanese ? '注目👀' : 'Featured👀',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
           ),
-          SizedBox(height: 10),
+          const SizedBox(height: 10),
           Container(
             height: 150,
             child: ListView(
