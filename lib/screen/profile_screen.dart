@@ -23,10 +23,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
   }
 
   final List<Widget> _pages = [
-    HomePage(),
-    Text('Favorite'),
-    Text('Setting'),
-    EditProfileScreen(),
+    const HomePage(),
+    const Text('Favorite'),
+    const Text('Setting'),
+    const EditProfileScreen(),
   ];
 
   final List<String> _title = ['Home', 'Favorite', 'Setting', 'Editprofile'];
@@ -36,13 +36,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
     return Scaffold(
       backgroundColor: Colors.blue[50],
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           'holoplus',
           style: TextStyle(fontWeight: FontWeight.bold, color: Colors.blue),
         ),
         backgroundColor: Colors.white,
         elevation: 0,
-        leading: Icon(Icons.menu, color: Colors.blue),
+        leading: const Icon(Icons.menu, color: Colors.blue),
       ),
       body: _pages[_selectedItem],
       bottomNavigationBar: BottomNavigationBar(

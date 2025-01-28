@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:modern_profile/constant/constant.dart';
+import '../components/detail_card.dart';
 import '../components/home_img.dart';
-import '../components/profile_menu.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -11,11 +11,38 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   bool isJapanese = false;
+  int currentBannerIndex = 0;
 
   void toggleLanguage(String? language) {
     setState(() {
       isJapanese = language == '日本語';
     });
+  }
+
+  final List<Map<String, String>> bannerData = [
+    {
+      'image': 'assets/images/featured_banner1.jpg',
+      'url':
+          'https://grimoire.hololivepro.com/?utm_source=holoplus&utm_medium=social&utm_campaign=hp_topbanner_global/banner1'
+    },
+    {
+      'image': 'assets/images/featured_banner2.jpg',
+      'url':
+          'https://supernova.hololivepro.com/?utm_source=holoplus&utm_medium=social&utm_campaign=hp_topbanner_global/banner2'
+    },
+    {
+      'image': 'assets/images/featured_banner3.jpg',
+      'url':
+          'https://fbkingdom.hololivepro.com/?utm_source=holoplus&utm_medium=social&utm_campaign=hp_topbanner_global/banner3'
+    },
+  ];
+
+  void _launchURL(String url) async {
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
   }
 
   @override
@@ -43,13 +70,55 @@ class _HomePageState extends State<HomePage> {
           // Featured Banner
           Container(
             margin: const EdgeInsets.symmetric(horizontal: 16.0),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(12),
-              image: DecorationImage(
-                image: AssetImage(
-                    'assets/featured_banner.jpg'), // Replace with your image
-                fit: BoxFit.cover,
-              ),
+            child: Stack(
+              children: [
+                PageView.builder(
+                  onPageChanged: (index) {
+                    setState(() {
+                      currentBannerIndex = index;
+                    });
+                  },
+                  itemCount: bannerData.length,
+                  itemBuilder: (context, index) {
+                    return GestureDetector(
+                      onTap: () => _launchURL(bannerData[index]['url']!),
+                      child: Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(12),
+                          image: DecorationImage(
+                            image: AssetImage(bannerData[index]['image']!),
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                        height: 200,
+                      ),
+                    );
+                  },
+                ),
+                Positioned(
+                  bottom: 8,
+                  left: 0,
+                  right: 0,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: List.generate(
+                      bannerData.length,
+                      (index) => AnimatedContainer(
+                        duration: Duration(milliseconds: 300),
+                        margin: const EdgeInsets.symmetric(horizontal: 4.0),
+                        width: currentBannerIndex == index ? 12.0 : 8.0,
+                        height: 8.0,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: currentBannerIndex == index
+                              ? Colors.blue
+                              : Colors.grey,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
             ),
             height: 200,
           ),
@@ -172,15 +241,43 @@ class _HomePageState extends State<HomePage> {
               scrollDirection: Axis.horizontal,
               children: [
                 FeaturedCard(
-                    image: 'assets/featured1.jpg',
-                    title: isJapanese
-                        ? '沙花叉クロエの卒業配信'
-                        : 'Sakamata Chloe\'s final stream'),
+                  image: 'assets/images/featured1.jpg',
+                  title: isJapanese
+                      ? '沙花叉クロエの卒業配信'
+                      : 'Sakamata Chloe\'s final stream',
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => DetailPage(
+                          title: isJapanese
+                              ? '沙花叉クロエの卒業配信'
+                              : 'Sakamata Chloe\'s final stream',
+                          image: 'assets/images/featured1.jpg',
+                        ),
+                      ),
+                    );
+                  },
+                ),
                 FeaturedCard(
-                    image: 'assets/featured2.jpg',
-                    title: isJapanese
-                        ? 'もう一つのエキサイティングなイベント'
-                        : 'Another Exciting Event'),
+                  image: 'assets/images/featured2.jpg',
+                  title: isJapanese
+                      ? 'もう一つのエキサイティングなイベント'
+                      : 'Another Exciting Event',
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => DetailPage(
+                          title: isJapanese
+                              ? 'もう一つのエキサイティングなイベント'
+                              : 'Another Exciting Event',
+                          image: 'assets/images/featured2.jpg',
+                        ),
+                      ),
+                    );
+                  },
+                ),
               ],
             ),
           ),
