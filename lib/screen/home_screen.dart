@@ -4,6 +4,8 @@ import '../components/home_img.dart';
 import '../components/profile_menu.dart';
 
 class HomePage extends StatelessWidget {
+  const HomePage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -11,8 +13,8 @@ class HomePage extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           // Level Section
-          Padding(
-            padding: const EdgeInsets.all(16.0),
+          const Padding(
+            padding: EdgeInsets.all(16.0),
             child: Row(
               children: [
                 CircleAvatar(
@@ -31,7 +33,7 @@ class HomePage extends StatelessWidget {
             margin: const EdgeInsets.symmetric(horizontal: 16.0),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(12),
-              image: DecorationImage(
+              image: const DecorationImage(
                 image: AssetImage(
                     'assets/featured_banner.jpg'), // Replace with your image
                 fit: BoxFit.cover,
@@ -54,7 +56,7 @@ class HomePage extends StatelessWidget {
                       borderRadius: BorderRadius.circular(20),
                     ),
                   ),
-                  child: Text('My Oshi off'),
+                  child: const Text('My Oshi off'),
                 ),
                 DropdownButton<String>(
                   value: 'English',
@@ -71,14 +73,14 @@ class HomePage extends StatelessWidget {
           ),
 
           // Latest News
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 16.0),
             child: Text(
               'Latest News📰',
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
           ),
-          SizedBox(height: 10),
+          const SizedBox(height: 10),
           Container(
             margin: const EdgeInsets.symmetric(horizontal: 16.0),
             padding: const EdgeInsets.all(16.0),
@@ -93,7 +95,7 @@ class HomePage extends StatelessWidget {
                 ),
               ],
             ),
-            child: Column(
+            child: const Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Row(
@@ -137,22 +139,22 @@ class HomePage extends StatelessWidget {
             ),
           ),
 
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
 
           // Featured Section
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 16.0),
             child: Text(
               'Featured👀',
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
           ),
-          SizedBox(height: 10),
+          const SizedBox(height: 10),
           Container(
             height: 150,
             child: ListView(
               scrollDirection: Axis.horizontal,
-              children: [
+              children: const [
                 FeaturedCard(
                     image: 'assets/featured1.jpg',
                     title: 'Sakamata Chloe\'s final stream'),
@@ -160,45 +162,6 @@ class HomePage extends StatelessWidget {
                     image: 'assets/featured2.jpg',
                     title: 'Another Exciting Event'),
               ],
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class FeaturedCard extends StatelessWidget {
-  final String image;
-  final String title;
-
-  const FeaturedCard({required this.image, required this.title});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: 200,
-      margin: const EdgeInsets.only(left: 16.0),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(12),
-        image: DecorationImage(
-          image: AssetImage(image),
-          fit: BoxFit.cover,
-        ),
-      ),
-      child: Stack(
-        children: [
-          Positioned(
-            bottom: 0,
-            left: 0,
-            right: 0,
-            child: Container(
-              color: Colors.black.withOpacity(0.5),
-              padding: const EdgeInsets.all(8.0),
-              child: Text(
-                title,
-                style: TextStyle(color: Colors.white),
-              ),
             ),
           ),
         ],
