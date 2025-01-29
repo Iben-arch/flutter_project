@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:modern_profile/components/profile_img.dart';
 import 'package:modern_profile/components/profile_menu.dart';
 import 'package:modern_profile/constant/constant.dart';
+import 'package:modern_profile/screen/holochat_screen.dart';
+import 'package:modern_profile/screen/holodule_screen.dart';
 import 'package:modern_profile/screen/home_screen.dart';
 import 'editprofile_screen.dart';
 
@@ -26,8 +28,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   final List<Widget> _pages = [
     const HomePage(),
-    const Text('Community'),
-    const Text('Holodule'),
+    HololiveChatScreen(),
+    const HoLoDule(),
     const EditProfileScreen(),
   ];
 
@@ -38,51 +40,19 @@ class _ProfileScreenState extends State<ProfileScreen> {
     return Scaffold(
       backgroundColor: Colors.blue[50],
       appBar: AppBar(
-        title: const Text(
-          'holoplus+',
-          style: TextStyle(fontWeight: FontWeight.bold, color: Colors.blue),
-        ),
         backgroundColor: Colors.white,
         elevation: 0,
-        leading: IconButton(
-          icon: Icon(Icons.menu, color: Colors.blue),
-          onPressed: () {
-            _scaffoldKey.currentState?.openDrawer();
-          },
+        centerTitle: true,
+        title: Image.asset(
+          'assets/images/holoplus_logo.png', // Replace with your logo asset
+          height: 40,
         ),
-      ),
-      drawer: Drawer(
-        child: ListView(
-          padding: EdgeInsets.zero,
-          children: [
-            DrawerHeader(
-              decoration: BoxDecoration(
-                color: Colors.blue,
-              ),
-              child: Text(
-                'Menu',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 24,
-                ),
-              ),
-            ),
-            ListTile(
-              leading: Icon(Icons.home),
-              title: Text('Home'),
-              onTap: () {
-                Navigator.pop(context);
-              },
-            ),
-            ListTile(
-              leading: Icon(Icons.settings),
-              title: Text('Settings'),
-              onTap: () {
-                Navigator.pop(context);
-              },
-            ),
-          ],
-        ),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.filter_list, color: Colors.blue),
+            onPressed: () {},
+          ),
+        ],
       ),
       body: _pages[_selectedItem],
       bottomNavigationBar: BottomNavigationBar(

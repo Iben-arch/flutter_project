@@ -304,16 +304,16 @@ class _HomePageState extends State<HomePage> {
                 FeaturedCard(
                   image: 'assets/images/featured2.jpg',
                   title: isJapanese
-                      ? 'もう一つのエキサイティングなイベント'
-                      : 'Another Exciting Event',
+                      ? '「ホロライブEnglish -Myth-」がAVIOT VTuber POP UP SHOP in OIOIに登場！'
+                      : 'hololive English -Myth- New Merchandise will be available at AVIOT VTuber POP UP SHOP in OIOIt',
                   onTap: () {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
                         builder: (context) => DetailPage(
                           title: isJapanese
-                              ? 'もう一つのエキサイティングなイベント'
-                              : 'Another Exciting Event',
+                              ? '「ホロライブEnglish -Myth-」がAVIOT VTuber POP UP SHOP in OIOIに登場！'
+                              : 'hololive English -Myth- New Merchandise will be available at AVIOT VTuber POP UP SHOP in OIOI',
                           image: 'assets/images/featured2.jpg',
                         ),
                       ),
