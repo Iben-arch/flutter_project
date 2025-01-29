@@ -18,9 +18,7 @@ class EditProfileScreen extends StatelessWidget {
             children: [
               SizedBox(height: 20),
               CircleAvatar(
-                radius: 50,
-                backgroundColor: Colors.white,
-                child: Icon(Icons.water_drop, size: 50, color: Colors.blue),
+                backgroundImage: AssetImage('assets/images/profile_image.jpg'),
               ),
               SizedBox(height: 10),
               Text("Nora",

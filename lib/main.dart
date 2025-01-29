@@ -11,7 +11,7 @@ class HoloPlusApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Modern Profile 2024',
+      title: 'Holoplus+',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(primarySwatch: Colors.blue),
       home: const ProfileScreen(),

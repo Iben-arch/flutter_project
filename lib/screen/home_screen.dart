@@ -32,7 +32,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   void _startBannerTimer() {
-    _bannerTimer = Timer.periodic(const Duration(seconds: 5), (timer) {
+    _bannerTimer = Timer.periodic(const Duration(seconds: 8), (timer) {
       setState(() {
         currentBannerIndex = (currentBannerIndex + 1) % bannerData.length;
         _pageController.animateToPage(
@@ -54,17 +54,26 @@ class _HomePageState extends State<HomePage> {
     {
       'image': 'assets/images/featured_banner1.jpg',
       'url':
-          'https://grimoire.hololivepro.com/?utm_source=holoplus&utm_medium=social&utm_campaign=hp_topbanner_global/banner1'
+          'https://hololivesuperexpo2025.hololivepro.com/en?utm_source=holoplus&utm_medium=social&utm_campaign=hp_topbanner_global/banner1'
     },
     {
       'image': 'assets/images/featured_banner2.jpg',
       'url':
-          'https://supernova.hololivepro.com/?utm_source=holoplus&utm_medium=social&utm_campaign=hp_topbanner_global/banner2'
+          'https://grimoire.hololivepro.com/?utm_source=holoplus&utm_medium=social&utm_campaign=hp_topbanner_global/banner2'
     },
     {
       'image': 'assets/images/featured_banner3.jpg',
       'url':
-          'https://fbkingdom.hololivepro.com/?utm_source=holoplus&utm_medium=social&utm_campaign=hp_topbanner_global/banner3'
+          'https://supernova.hololivepro.com/?utm_source=holoplus&utm_medium=social&utm_campaign=hp_topbanner_global/banner3'
+    },
+    {
+      'image': 'assets/images/featured_banner4.jpg',
+      'url':
+          'https://fbkingdom.hololivepro.com/?utm_source=holoplus&utm_medium=social&utm_campaign=hp_topbanner_global/banner4'
+    },
+    {
+      'image': 'assets/images/featured_banner5.jpg',
+      'url': 'https://hololivemeet.hololivepro.com/banner5'
     },
   ];
 
@@ -88,8 +97,8 @@ class _HomePageState extends State<HomePage> {
             child: Row(
               children: [
                 const CircleAvatar(
-                  backgroundColor: Colors.blue,
-                  child: Icon(Icons.star, color: Colors.white),
+                  backgroundImage:
+                      AssetImage('assets/images/profile_image.jpg'),
                 ),
                 const SizedBox(width: 10),
                 Text(isJapanese ? 'レベル 1 | 0+' : 'LV 1 | 0+',
@@ -100,7 +109,7 @@ class _HomePageState extends State<HomePage> {
 
           // Featured Banner
           Container(
-            margin: const EdgeInsets.symmetric(horizontal: 16.0),
+            margin: const EdgeInsets.symmetric(vertical: 16.0),
             child: Stack(
               children: [
                 PageView.builder(
@@ -115,6 +124,7 @@ class _HomePageState extends State<HomePage> {
                     return GestureDetector(
                       onTap: () => _launchURL(bannerData[index]['url']!),
                       child: Container(
+                        margin: const EdgeInsets.symmetric(horizontal: 8.0),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(12),
                           image: DecorationImage(
