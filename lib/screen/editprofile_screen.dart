@@ -11,75 +11,94 @@ class EditProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      child: Stack(
+      child: Column(
         children: [
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              SizedBox(height: 20),
-              CircleAvatar(
-                backgroundImage: AssetImage('assets/images/profile_image.jpg'),
+          // Header Section
+          Container(
+            decoration: BoxDecoration(
+              color: Colors.blue,
+              borderRadius: BorderRadius.only(
+                bottomLeft: Radius.circular(30),
+                bottomRight: Radius.circular(30),
               ),
-              SizedBox(height: 10),
-              Text("Nora",
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
-              Text("holoplus points LV 1 | 0+",
-                  style: TextStyle(color: Colors.grey)),
-              SizedBox(height: 20),
-              Container(
-                padding: EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-                decoration: BoxDecoration(
-                  color: Colors.blue[200],
-                  borderRadius: BorderRadius.circular(20),
+            ),
+            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 30),
+            child: Column(
+              children: [
+                CircleAvatar(
+                  backgroundImage:
+                      AssetImage('assets/images/profile_image.jpg'),
                 ),
-                child: Text("My Oshi",
-                    style: TextStyle(color: Colors.white, fontSize: 18)),
-              ),
-              SizedBox(height: 10),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  CircleAvatar(backgroundColor: Colors.blue, radius: 20),
-                  SizedBox(width: 10),
-                  CircleAvatar(backgroundColor: Colors.red, radius: 20),
-                  SizedBox(width: 10),
-                  CircleAvatar(backgroundColor: Colors.pink, radius: 20),
-                  SizedBox(width: 10),
-                  CircleAvatar(backgroundColor: Colors.purple, radius: 20),
-                  SizedBox(width: 10),
-                  CircleAvatar(backgroundColor: Colors.orange, radius: 20),
-                ],
-              ),
-              SizedBox(height: 20),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Icon(Icons.bookmark, color: Colors.blue),
-                  SizedBox(width: 5),
-                  Text("Saved"),
-                  SizedBox(width: 20),
-                  Icon(Icons.forum, color: Colors.blue),
-                  SizedBox(width: 5),
-                  Text("My threads"),
-                  SizedBox(width: 20),
-                  Icon(Icons.comment, color: Colors.blue),
-                  SizedBox(width: 5),
-                  Text("My comments"),
-                ],
-              ),
-            ],
-          ),
-          Positioned(
-            top: 10,
-            right: 10,
-            child: IconButton(
-              icon: Icon(Icons.settings, color: Colors.black, size: 30),
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => SettingsScreen()),
-                );
-              },
+                SizedBox(height: 10),
+                Text(
+                  'Nora',
+                  style: TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  ),
+                ),
+                SizedBox(height: 5),
+                Text(
+                  'holoplus points  |  LV 1  |  0+',
+                  style: TextStyle(
+                    fontSize: 14,
+                    color: Colors.white70,
+                  ),
+                ),
+                SizedBox(height: 20),
+                Container(
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(15),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black12,
+                        blurRadius: 10,
+                        spreadRadius: 2,
+                      ),
+                    ],
+                  ),
+                  padding: EdgeInsets.all(20),
+                  child: Column(
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            'My Oshi',
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          TextButton(
+                            onPressed: () {},
+                            child: Text(
+                              'Edit',
+                              style: TextStyle(color: Colors.blue),
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: 10),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: List.generate(
+                          5,
+                          (index) => CircleAvatar(
+                            radius: 30,
+                            backgroundColor: Colors.grey[300],
+                            backgroundImage: AssetImage(
+                              'assets/avatar_$index.png', // เปลี่ยนภาพตามที่คุณมี
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
             ),
           ),
         ],

@@ -50,7 +50,55 @@ class _ProfileScreenState extends State<ProfileScreen> {
         actions: [
           IconButton(
             icon: Icon(Icons.filter_list, color: Colors.blue),
-            onPressed: () {},
+            onPressed: () {
+              showModalBottomSheet(
+                context: context,
+                builder: (context) {
+                  return Container(
+                    color: Colors.white,
+                    child: ListView(
+                      padding: EdgeInsets.all(8.0),
+                      children: [
+                        ListTile(
+                          title: Text('hololive News',
+                              style: TextStyle(color: Colors.black)),
+                          trailing: Icon(Icons.verified, color: Colors.blue),
+                          onTap: () {
+                            // Handle tap
+                          },
+                        ),
+                        ListTile(
+                          title: Text('hololive Plus',
+                              style: TextStyle(color: Colors.black)),
+                          trailing: Icon(Icons.verified, color: Colors.blue),
+                          onTap: () {
+                            // Handle tap
+                          },
+                        ),
+                        ListTile(
+                          title: Text('hololive Chat',
+                              style: TextStyle(color: Colors.black)),
+                          trailing: Icon(Icons.chat_bubble_outline),
+                          onTap: () {
+                            // Handle tap
+                          },
+                        ),
+                        // เพิ่มไอเทมใหม่ในเมนูที่นี่
+                        ListTile(
+                          title: Text('New Menu Item',
+                              style: TextStyle(color: Colors.black)),
+                          trailing:
+                              Icon(Icons.new_releases, color: Colors.orange),
+                          onTap: () {
+                            // Handle tap
+                          },
+                        ),
+                      ],
+                    ),
+                  );
+                },
+              );
+            },
           ),
         ],
       ),

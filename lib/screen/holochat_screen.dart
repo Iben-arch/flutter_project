@@ -53,6 +53,10 @@ class HololiveChatScreen extends StatelessWidget {
                           value: 'Updated',
                           child: Text('Updated'),
                         ),
+                        DropdownMenuItem(
+                          value: 'Newest',
+                          child: Text('Newest'),
+                        ),
                       ],
                       onChanged: (value) {},
                     ),
