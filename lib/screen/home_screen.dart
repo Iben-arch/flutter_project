@@ -97,8 +97,7 @@ class _HomePageState extends State<HomePage> {
             child: Row(
               children: [
                 const CircleAvatar(
-                  backgroundImage:
-                      AssetImage('assets/images/profile_image.jpg'),
+                  backgroundImage: AssetImage('assets/profile/suisei.png'),
                 ),
                 const SizedBox(width: 10),
                 Text(isJapanese ? 'レベル 1 | 0+' : 'LV 1 | 0+',

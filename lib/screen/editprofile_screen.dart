@@ -16,7 +16,8 @@ class EditProfileScreen extends StatefulWidget {
 }
 
 class _EditProfileScreenState extends State<EditProfileScreen> {
-  ImageProvider<Object>? _avatarImage = AssetImage('assets/profile/suisei.png');
+  ImageProvider<Object>? _avatarImage =
+      const AssetImage('assets/profile/suisei.png');
 
   Future<void> _pickImage() async {
     final ImagePicker _picker = ImagePicker();
@@ -34,8 +35,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
       child: Column(
         children: [
           Container(
-            margin: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
-            padding: EdgeInsets.all(10),
+            margin: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+            padding: const EdgeInsets.all(10),
             decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.circular(10),
@@ -43,8 +44,9 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
             child: Column(
               children: [
                 Container(
-                  margin: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
-                  padding: EdgeInsets.all(10),
+                  margin:
+                      const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+                  padding: const EdgeInsets.all(10),
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(10),
@@ -64,7 +66,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                             radius: 17,
                             backgroundColor: Colors.blue,
                             child: IconButton(
-                              icon: Icon(
+                              icon: const Icon(
                                 Icons.photo_outlined,
                                 color: Colors.white,
                               ),
@@ -75,8 +77,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                           ),
                         ],
                       ),
-                      SizedBox(height: 10),
-                      Text(
+                      const SizedBox(height: 10),
+                      const Text(
                         'Nora',
                         style: TextStyle(
                           fontSize: 20,
@@ -84,12 +86,33 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                           color: Colors.black,
                         ),
                       ),
-                      SizedBox(height: 5),
-                      Text(
-                        'holoplus points   LV 1   0+',
-                        style: TextStyle(
-                          fontSize: 16,
-                          color: Colors.grey,
+                      const SizedBox(height: 5),
+                      Center(
+                        child: const Row(
+                          children: [
+                            const Image(
+                              image:
+                                  AssetImage('assets/icons/icon_holoplus.png'),
+                              width: 20,
+                              height: 20,
+                            ),
+                            SizedBox(width: 5),
+                            Text(
+                              'holoplus points',
+                              style: TextStyle(
+                                fontSize: 16,
+                                color: Colors.blue,
+                              ),
+                            ),
+                            SizedBox(width: 10),
+                            Text(
+                              'LV 1   0+',
+                              style: TextStyle(
+                                fontSize: 16,
+                                color: Colors.black,
+                              ),
+                            )
+                          ],
                         ),
                       ),
                       Divider(
@@ -99,7 +122,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text(
+                          const Text(
                             'My Oshi',
                             style: TextStyle(
                               fontSize: 16,
@@ -108,22 +131,22 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                           ),
                           TextButton(
                             onPressed: () {},
-                            child: Text('Edit',
+                            child: const Text('Edit',
                                 style: TextStyle(color: Colors.blue)),
                           )
                         ],
                       ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: List.generate(
-                          5,
-                          (index) => CircleAvatar(
-                            radius: 25,
-                            backgroundColor: Colors.grey.shade300,
-                            child: Icon(Icons.person, color: Colors.blue),
-                          ),
-                        ),
-                      )
+                      // Row(
+                      //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      //   children: List.generate(
+                      //     5,
+                      //     (index) => CircleAvatar(
+                      //       radius: 25,
+                      //       backgroundColor: Colors.grey.shade300,
+                      //       child: Icon(Icons.person, color: Colors.blue),
+                      //     ),
+                      //   ),
+                      // )
                     ],
                   ),
                 ),
