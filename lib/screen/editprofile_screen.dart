@@ -25,6 +25,10 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     'assets/profile/Tool.png',
     'assets/profile/sakura.png',
     'assets/profile/suisei.png',
+    'assets/profile/peach.png',
+    'assets/profile/onikiri.png',
+    'assets/profile/moon.png',
+    'assets/profile/sheep.png',
     // Add more icon paths here
   ];
   @override
