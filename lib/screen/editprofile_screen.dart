@@ -2,9 +2,10 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:modern_profile/screen/setting_page.dart';
 import '../components/oshi_avatar.dart';
-import 'setting_page.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class EditProfileScreen extends StatefulWidget {
   const EditProfileScreen({
@@ -16,17 +17,69 @@ class EditProfileScreen extends StatefulWidget {
 }
 
 class _EditProfileScreenState extends State<EditProfileScreen> {
-  ImageProvider<Object>? _avatarImage =
-      const AssetImage('assets/profile/suisei.png');
+  ImageProvider<Object>? _avatarImage;
+
+  final List<String> _iconPaths = [
+    'assets/profile/bear.png',
+    'assets/profile/robot.png',
+    'assets/profile/Tool.png',
+    'assets/profile/sakura.png',
+    'assets/profile/suisei.png',
+    // Add more icon paths here
+  ];
+  @override
+  void initState() {
+    super.initState();
+    _loadAvatarImage();
+  }
+
+  Future<void> _loadAvatarImage() async {
+    final prefs = await SharedPreferences.getInstance();
+    final savedImagePath = prefs.getString('avatar_image');
+    setState(() {
+      _avatarImage = savedImagePath != null
+          ? AssetImage(savedImagePath)
+          : AssetImage('assets/profile/suisei.png');
+    });
+  }
+
+  Future<void> _saveAvatarImage(String path) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString('avatar_image', path);
+  }
 
   Future<void> _pickImage() async {
-    final ImagePicker _picker = ImagePicker();
-    final XFile? image = await _picker.pickImage(source: ImageSource.gallery);
-    if (image != null) {
-      setState(() {
-        _avatarImage = FileImage(File(image.path));
-      });
-    }
+    showModalBottomSheet(
+      context: context,
+      builder: (BuildContext context) {
+        return Container(
+          height: 300,
+          padding: EdgeInsets.all(10),
+          child: GridView.builder(
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 5,
+              crossAxisSpacing: 10,
+              mainAxisSpacing: 10,
+            ),
+            itemCount: _iconPaths.length,
+            itemBuilder: (BuildContext context, int index) {
+              return GestureDetector(
+                onTap: () {
+                  setState(() {
+                    _avatarImage = AssetImage(_iconPaths[index]);
+                  });
+                  _saveAvatarImage(_iconPaths[index]);
+                  Navigator.pop(context);
+                },
+                child: CircleAvatar(
+                  backgroundImage: AssetImage(_iconPaths[index]),
+                ),
+              );
+            },
+          ),
+        );
+      },
+    );
   }
 
   @override
@@ -34,6 +87,36 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     return SingleChildScrollView(
       child: Column(
         children: [
+          SizedBox(
+            height: 15,
+          ),
+          Container(
+            margin: EdgeInsets.only(left: 250),
+            child: ElevatedButton.icon(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => SettingsScreen()),
+                );
+              },
+              icon: Icon(
+                Icons.settings,
+                color: Colors.blue,
+              ),
+              label: Text(
+                'Settings',
+                style: TextStyle(color: Colors.blue),
+              ),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.white,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                padding: EdgeInsets.symmetric(horizontal: 12, vertical: 5),
+                elevation: 2,
+              ),
+            ),
+          ),
           Container(
             margin: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
             padding: const EdgeInsets.all(10),
@@ -61,18 +144,26 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                             radius: 40,
                             backgroundColor: Colors.white,
                             backgroundImage: _avatarImage,
-                          ),
-                          CircleAvatar(
-                            radius: 17,
-                            backgroundColor: Colors.blue,
                             child: IconButton(
-                              icon: const Icon(
-                                Icons.photo_outlined,
-                                color: Colors.white,
-                              ),
-                              iconSize: 20,
                               onPressed: _pickImage,
                               tooltip: 'Change Image',
+                              icon: Icon(null),
+                            ),
+                          ),
+                          Positioned(
+                            bottom: 0,
+                            right: 0,
+                            child: CircleAvatar(
+                              radius: 17,
+                              backgroundColor: Colors.blue,
+                              child: IconButton(
+                                icon: Icon(
+                                    Icons.photo_size_select_actual_outlined,
+                                    color: Colors.white),
+                                iconSize: 20,
+                                onPressed: _pickImage,
+                                tooltip: 'Change Image',
+                              ),
                             ),
                           ),
                         ],

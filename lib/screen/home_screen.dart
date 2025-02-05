@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import '../components/detail_card.dart';
 import '../components/home_img.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -12,17 +13,80 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  bool isJapanese = false;
-  int currentBannerIndex = 0;
-  Timer? _bannerTimer;
-  late PageController _pageController;
+  //////////////////////////////////////////////////////////////////////////////
+  ImageProvider<Object>? _avatarImage;
 
+  final List<String> _iconPaths = [
+    'assets/profile/bear.png',
+    'assets/profile/robot.png',
+    'assets/profile/Tool.png',
+    'assets/profile/sakura.png',
+    'assets/profile/suisei.png',
+    // Add more icon paths here
+  ];
   @override
   void initState() {
+    super.initState();
+    _loadAvatarImage();
     super.initState();
     _pageController = PageController(initialPage: currentBannerIndex);
     _startBannerTimer();
   }
+
+  Future<void> _loadAvatarImage() async {
+    final prefs = await SharedPreferences.getInstance();
+    final savedImagePath = prefs.getString('avatar_image');
+    setState(() {
+      _avatarImage = savedImagePath != null
+          ? AssetImage(savedImagePath)
+          : AssetImage('assets/profile/suisei.png');
+    });
+  }
+
+  Future<void> _saveAvatarImage(String path) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString('avatar_image', path);
+  }
+
+  Future<void> _pickImage() async {
+    showModalBottomSheet(
+      context: context,
+      builder: (BuildContext context) {
+        return Container(
+          height: 300,
+          padding: EdgeInsets.all(10),
+          child: GridView.builder(
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 5,
+              crossAxisSpacing: 10,
+              mainAxisSpacing: 10,
+            ),
+            itemCount: _iconPaths.length,
+            itemBuilder: (BuildContext context, int index) {
+              return GestureDetector(
+                onTap: () {
+                  setState(() {
+                    _avatarImage = AssetImage(_iconPaths[index]);
+                  });
+                  _saveAvatarImage(_iconPaths[index]);
+                  Navigator.pop(context);
+                },
+                child: CircleAvatar(
+                  backgroundImage: AssetImage(_iconPaths[index]),
+                ),
+              );
+            },
+          ),
+        );
+      },
+    );
+  }
+
+  ////////////////////////////////////////////////////////////////////////////
+  bool isJapanese = false;
+  int currentBannerIndex = 0;
+  Timer? _bannerTimer;
+  late PageController _pageController;
 
   @override
   void dispose() {
@@ -96,8 +160,8 @@ class _HomePageState extends State<HomePage> {
             padding: const EdgeInsets.all(16.0),
             child: Row(
               children: [
-                const CircleAvatar(
-                  backgroundImage: AssetImage('assets/profile/suisei.png'),
+                CircleAvatar(
+                  backgroundImage: _avatarImage,
                 ),
                 const SizedBox(width: 10),
                 Text(isJapanese ? 'レベル 1 | 0+' : 'LV 1 | 0+',

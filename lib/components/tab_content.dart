@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:modern_profile/constant/constant.dart';
 
 import 'video_card.dart';
 
@@ -9,18 +10,45 @@ class RecentTabContent extends StatelessWidget {
       padding: EdgeInsets.all(8.0),
       children: [
         SectionHeader(title: 'Jan. 30 (Thu)'),
+        Container(
+          child: Text(
+            '     17:00 ~',
+            style: TextStyle(color: Colors.white),
+          ),
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(5), color: Colors.blue),
+          // color: Colors.blue,
+        ),
+        SizedBox(
+          height: 8,
+        ),
         VideoCard(
           title: '【DRAWING】 STREAM',
           streamer: 'Ninomae Inanis',
           thumbnail: 'assets/videos/drawing_thumbnail.png',
-          time: '01/30/2025 05:00',
+          time: '01/30/2025 17:00',
           link: 'https://www.youtube.com/live/ZyacEjF4brU?si=17Qv47iKcGsU_Qny',
+        ),
+        SizedBox(
+          height: 10,
+        ),
+        Container(
+          child: Text(
+            '     16:00 ~',
+            style: TextStyle(color: Colors.white),
+          ),
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(5), color: Colors.blue),
+          // color: Colors.blue,
+        ),
+        SizedBox(
+          height: 8,
         ),
         VideoCard(
           title: 'お客さんいつもより進んでますね！【＃今日のわため】',
           streamer: 'Tsunomaki Watame',
           thumbnail: 'assets/videos/watame_thumbnail.png',
-          time: '01/30/2025 04:00',
+          time: '01/30/2025 16:00',
           link: 'https://youtu.be/4_4Qn-N2Gjo?si=TRq-Q8JYUeVny9Lw',
         ),
       ],
