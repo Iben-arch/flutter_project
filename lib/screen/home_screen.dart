@@ -39,7 +39,7 @@ class _HomePageState extends State<HomePage> {
     setState(() {
       _avatarImage = savedImagePath != null
           ? AssetImage(savedImagePath)
-          : AssetImage('assets/profile/suisei.png');
+          : AssetImage('assets/profile/profile8.png');
     });
   }
 
@@ -137,7 +137,8 @@ class _HomePageState extends State<HomePage> {
     },
     {
       'image': 'assets/images/featured_banner5.jpg',
-      'url': 'https://hololivemeet.hololivepro.com/banner5'
+      'url':
+          'https://shop.hololivepro.com/en/products/hololive_valentinevoice2025?utm_source=holoplus&utm_medium=social&utm_campaign=hp_topbanner_global/banner5'
     },
   ];
 

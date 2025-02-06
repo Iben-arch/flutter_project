@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:modern_profile/screen/edit_oshi_page.dart';
 import 'package:modern_profile/screen/setting_page.dart';
 import '../components/oshi_avatar.dart';
 import 'package:image_picker/image_picker.dart';
@@ -18,23 +19,41 @@ class EditProfileScreen extends StatefulWidget {
 
 class _EditProfileScreenState extends State<EditProfileScreen> {
   ImageProvider<Object>? _avatarImage;
+  List<String> _selectedOshi = [];
 
   final List<String> _iconPaths = [
-    'assets/profile/bear.png',
-    'assets/profile/robot.png',
-    'assets/profile/Tool.png',
-    'assets/profile/sakura.png',
-    'assets/profile/suisei.png',
-    'assets/profile/peach.png',
-    'assets/profile/onikiri.png',
-    'assets/profile/moon.png',
-    'assets/profile/sheep.png',
+    'assets/profile/profile1.png',
+    'assets/profile/profile2.png',
+    'assets/profile/profile3.png',
+    'assets/profile/profile4.png',
+    'assets/profile/profile5.png',
+    'assets/profile/profile6.png',
+    'assets/profile/profile7.png',
+    'assets/profile/profile8.png',
+    'assets/profile/profile9.png',
     // Add more icon paths here
+  ];
+
+  final List<String> _oshiPaths = [
+    'assets/icons/icon1.png',
+    'assets/icons/icon2.png',
+    'assets/icons/icon3.png',
+    'assets/icons/icon4.png',
+    'assets/icons/icon5.png',
+  ];
+
+  final List<String> _oshiNames = [
+    'Tokino Sora',
+    'Robocosan',
+    'AZKi',
+    'Sakura Miko',
+    'Hoshimachi Suisei'
   ];
   @override
   void initState() {
     super.initState();
     _loadAvatarImage();
+    _loadSelectedOshi();
   }
 
   Future<void> _loadAvatarImage() async {
@@ -43,13 +62,26 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     setState(() {
       _avatarImage = savedImagePath != null
           ? AssetImage(savedImagePath)
-          : AssetImage('assets/profile/suisei.png');
+          : AssetImage('assets/profile/profile8.png');
     });
   }
 
   Future<void> _saveAvatarImage(String path) async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setString('avatar_image', path);
+  }
+
+  Future<void> _loadSelectedOshi() async {
+    final prefs = await SharedPreferences.getInstance();
+    final savedOshi = prefs.getStringList('selected_oshi') ?? [];
+    setState(() {
+      _selectedOshi = savedOshi;
+    });
+  }
+
+  Future<void> _saveSelectedOshi(List<String> selectedOshi) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setStringList('selected_oshi', selectedOshi);
   }
 
   Future<void> _pickImage() async {
@@ -84,6 +116,25 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
         );
       },
     );
+  }
+
+  void _navigateToEditOshi() async {
+    final result = await Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => EditOshiPage(
+          selectedOshi: _selectedOshi,
+          oshiNames: _oshiNames,
+          oshiPaths: _oshiPaths, // ส่งข้อมูลรูปภาพ
+        ),
+      ),
+    );
+    if (result != null && result is List<String>) {
+      setState(() {
+        _selectedOshi = result;
+      });
+      _saveSelectedOshi(result);
+    }
   }
 
   @override
@@ -225,23 +276,43 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                             ),
                           ),
                           TextButton(
-                            onPressed: () {},
+                            onPressed: _navigateToEditOshi,
                             child: const Text('Edit',
                                 style: TextStyle(color: Colors.blue)),
                           )
                         ],
                       ),
-                      // Row(
-                      //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      //   children: List.generate(
-                      //     5,
-                      //     (index) => CircleAvatar(
-                      //       radius: 25,
-                      //       backgroundColor: Colors.grey.shade300,
-                      //       child: Icon(Icons.person, color: Colors.blue),
-                      //     ),
-                      //   ),
-                      // )
+                      LayoutBuilder(
+                        builder: (context, constraints) {
+                          final maxIconsPerRow =
+                              (constraints.maxWidth / 60).floor();
+                          final rows = List.generate(
+                            (_selectedOshi.length / maxIconsPerRow).ceil(),
+                            (rowIndex) => _selectedOshi
+                                .skip(rowIndex * maxIconsPerRow)
+                                .take(maxIconsPerRow),
+                          );
+
+                          return Column(
+                            children: rows.map((row) {
+                              return Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: row.map((name) {
+                                  final index = _oshiNames.indexOf(name);
+                                  return Padding(
+                                    padding: EdgeInsets.all(5),
+                                    child: CircleAvatar(
+                                      radius: 25 / rows.length,
+                                      backgroundImage:
+                                          AssetImage(_oshiPaths[index]),
+                                    ),
+                                  );
+                                }).toList(),
+                              );
+                            }).toList(),
+                          );
+                        },
+                      ),
                     ],
                   ),
                 ),
