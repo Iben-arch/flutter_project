@@ -6,7 +6,10 @@ class FeaturedCard extends StatelessWidget {
   final VoidCallback onTap;
 
   const FeaturedCard(
-      {required this.image, required this.title, required this.onTap});
+      {super.key,
+      required this.image,
+      required this.title,
+      required this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +36,7 @@ class FeaturedCard extends StatelessWidget {
                 padding: const EdgeInsets.all(8.0),
                 child: Text(
                   title,
-                  style: TextStyle(color: Colors.white),
+                  style: const TextStyle(color: Colors.white),
                 ),
               ),
             ),

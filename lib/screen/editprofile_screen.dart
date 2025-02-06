@@ -62,7 +62,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     setState(() {
       _avatarImage = savedImagePath != null
           ? AssetImage(savedImagePath)
-          : AssetImage('assets/profile/profile8.png');
+          : const AssetImage('assets/profile/profile8.png');
     });
   }
 
@@ -90,9 +90,9 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
       builder: (BuildContext context) {
         return Container(
           height: 300,
-          padding: EdgeInsets.all(10),
+          padding: const EdgeInsets.all(10),
           child: GridView.builder(
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 5,
               crossAxisSpacing: 10,
               mainAxisSpacing: 10,
@@ -142,11 +142,11 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     return SingleChildScrollView(
       child: Column(
         children: [
-          SizedBox(
+          const SizedBox(
             height: 15,
           ),
           Container(
-            margin: EdgeInsets.only(left: 250),
+            margin: const EdgeInsets.only(left: 250),
             child: ElevatedButton.icon(
               onPressed: () {
                 Navigator.push(
@@ -154,11 +154,11 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                   MaterialPageRoute(builder: (context) => SettingsScreen()),
                 );
               },
-              icon: Icon(
+              icon: const Icon(
                 Icons.settings,
                 color: Colors.blue,
               ),
-              label: Text(
+              label: const Text(
                 'Settings',
                 style: TextStyle(color: Colors.blue),
               ),
@@ -167,7 +167,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(20),
                 ),
-                padding: EdgeInsets.symmetric(horizontal: 12, vertical: 5),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 12, vertical: 5),
                 elevation: 2,
               ),
             ),
@@ -202,7 +203,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                             child: IconButton(
                               onPressed: _pickImage,
                               tooltip: 'Change Image',
-                              icon: Icon(null),
+                              icon: const Icon(null),
                             ),
                           ),
                           Positioned(
@@ -212,7 +213,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                               radius: 17,
                               backgroundColor: Colors.blue,
                               child: IconButton(
-                                icon: Icon(
+                                icon: const Icon(
                                     Icons.photo_size_select_actual_outlined,
                                     color: Colors.white),
                                 iconSize: 20,
@@ -233,10 +234,10 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                         ),
                       ),
                       const SizedBox(height: 5),
-                      Center(
-                        child: const Row(
+                      const Center(
+                        child: Row(
                           children: [
-                            const Image(
+                            Image(
                               image:
                                   AssetImage('assets/icons/icon_holoplus.png'),
                               width: 20,
@@ -300,7 +301,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                 children: row.map((name) {
                                   final index = _oshiNames.indexOf(name);
                                   return Padding(
-                                    padding: EdgeInsets.all(5),
+                                    padding: const EdgeInsets.all(5),
                                     child: CircleAvatar(
                                       radius: 25 / rows.length,
                                       backgroundImage:

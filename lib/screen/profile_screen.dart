@@ -49,7 +49,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         ),
         actions: [
           IconButton(
-            icon: Icon(Icons.filter_list, color: Colors.blue),
+            icon: const Icon(Icons.filter_list, color: Colors.blue),
             onPressed: () {
               showModalBottomSheet(
                 context: context,
@@ -57,38 +57,40 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   return Container(
                     color: Colors.white,
                     child: ListView(
-                      padding: EdgeInsets.all(8.0),
+                      padding: const EdgeInsets.all(8.0),
                       children: [
                         ListTile(
-                          title: Text('hololive News',
+                          title: const Text('hololive News',
                               style: TextStyle(color: Colors.black)),
-                          trailing: Icon(Icons.verified, color: Colors.blue),
+                          trailing:
+                              const Icon(Icons.verified, color: Colors.blue),
                           onTap: () {
                             // Handle tap
                           },
                         ),
                         ListTile(
-                          title: Text('hololive Plus',
+                          title: const Text('hololive Plus',
                               style: TextStyle(color: Colors.black)),
-                          trailing: Icon(Icons.verified, color: Colors.blue),
+                          trailing:
+                              const Icon(Icons.verified, color: Colors.blue),
                           onTap: () {
                             // Handle tap
                           },
                         ),
                         ListTile(
-                          title: Text('hololive Chat',
+                          title: const Text('hololive Chat',
                               style: TextStyle(color: Colors.black)),
-                          trailing: Icon(Icons.chat_bubble_outline),
+                          trailing: const Icon(Icons.chat_bubble_outline),
                           onTap: () {
                             // Handle tap
                           },
                         ),
                         // เพิ่มไอเทมใหม่ในเมนูที่นี่
                         ListTile(
-                          title: Text('New Menu Item',
+                          title: const Text('New Menu Item',
                               style: TextStyle(color: Colors.black)),
-                          trailing:
-                              Icon(Icons.new_releases, color: Colors.orange),
+                          trailing: const Icon(Icons.new_releases,
+                              color: Colors.orange),
                           onTap: () {
                             // Handle tap
                           },

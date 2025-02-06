@@ -8,7 +8,8 @@ class VideoCard extends StatelessWidget {
   final String time;
   final String link;
 
-  VideoCard({
+  const VideoCard({
+    super.key,
     required this.title,
     required this.streamer,
     required this.thumbnail,
@@ -25,7 +26,7 @@ class VideoCard extends StatelessWidget {
           await launchUrl(uri, mode: LaunchMode.externalApplication);
         } else {
           ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text('Could not open the link')),
+            const SnackBar(content: Text('Could not open the link')),
           );
         }
       },
@@ -38,7 +39,7 @@ class VideoCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             ClipRRect(
-              borderRadius: BorderRadius.vertical(
+              borderRadius: const BorderRadius.vertical(
                 top: Radius.circular(12),
               ),
               child: Image.asset(
@@ -55,19 +56,20 @@ class VideoCard extends StatelessWidget {
                 children: [
                   Text(
                     title,
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
+                    style: const TextStyle(
+                        fontWeight: FontWeight.bold, fontSize: 14),
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
                   ),
-                  SizedBox(height: 4),
+                  const SizedBox(height: 4),
                   Text(
                     streamer,
-                    style: TextStyle(color: Colors.grey, fontSize: 12),
+                    style: const TextStyle(color: Colors.grey, fontSize: 12),
                   ),
-                  SizedBox(height: 4),
+                  const SizedBox(height: 4),
                   Text(
                     time,
-                    style: TextStyle(fontSize: 12, color: Colors.grey),
+                    style: const TextStyle(fontSize: 12, color: Colors.grey),
                   ),
                 ],
               ),
@@ -82,7 +84,7 @@ class VideoCard extends StatelessWidget {
 class SectionHeader extends StatelessWidget {
   final String title;
 
-  SectionHeader({required this.title});
+  const SectionHeader({super.key, required this.title});
 
   @override
   Widget build(BuildContext context) {
@@ -90,7 +92,7 @@ class SectionHeader extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 8.0),
       child: Text(
         title,
-        style: TextStyle(
+        style: const TextStyle(
             fontSize: 18, fontWeight: FontWeight.bold, color: Colors.blue),
       ),
     );

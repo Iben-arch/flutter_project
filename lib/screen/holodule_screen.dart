@@ -19,7 +19,7 @@ class _HoLoDuleState extends State<HoLoDule> {
         children: [
           Container(
             color: Colors.blue,
-            padding: EdgeInsets.symmetric(vertical: 8.0),
+            padding: const EdgeInsets.symmetric(vertical: 8.0),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [

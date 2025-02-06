@@ -4,22 +4,24 @@ import 'package:modern_profile/constant/constant.dart';
 import 'video_card.dart';
 
 class RecentTabContent extends StatelessWidget {
+  const RecentTabContent({super.key});
+
   @override
   Widget build(BuildContext context) {
     return ListView(
-      padding: EdgeInsets.all(8.0),
+      padding: const EdgeInsets.all(8.0),
       children: [
         SectionHeader(title: 'Jan. 30 (Thu)'),
         Container(
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(5), color: Colors.blue),
           child: Text(
             '     17:00 ~',
             style: TextStyle(color: Colors.white),
           ),
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(5), color: Colors.blue),
           // color: Colors.blue,
         ),
-        SizedBox(
+        const SizedBox(
           height: 8,
         ),
         VideoCard(
@@ -29,19 +31,19 @@ class RecentTabContent extends StatelessWidget {
           time: '01/30/2025 17:00',
           link: 'https://www.youtube.com/live/ZyacEjF4brU?si=17Qv47iKcGsU_Qny',
         ),
-        SizedBox(
+        const SizedBox(
           height: 10,
         ),
         Container(
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(5), color: Colors.blue),
           child: Text(
             '     16:00 ~',
             style: TextStyle(color: Colors.white),
           ),
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(5), color: Colors.blue),
           // color: Colors.blue,
         ),
-        SizedBox(
+        const SizedBox(
           height: 8,
         ),
         VideoCard(
@@ -57,10 +59,12 @@ class RecentTabContent extends StatelessWidget {
 }
 
 class LiveTabContent extends StatelessWidget {
+  const LiveTabContent({super.key});
+
   @override
   Widget build(BuildContext context) {
     return ListView(
-      padding: EdgeInsets.all(8.0),
+      padding: const EdgeInsets.all(8.0),
       children: [
         SectionHeader(title: 'Jan. 29 (Wed)'),
         VideoCard(
@@ -97,9 +101,11 @@ class LiveTabContent extends StatelessWidget {
 }
 
 class StartingSoonTabContent extends StatelessWidget {
+  const StartingSoonTabContent({super.key});
+
   @override
   Widget build(BuildContext context) {
-    return Center(
+    return const Center(
       child: Text(
         'Starting Soon Tab Content',
         style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),

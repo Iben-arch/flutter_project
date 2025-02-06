@@ -9,6 +9,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
+  @override
   _HomePageState createState() => _HomePageState();
 }
 
@@ -39,7 +40,7 @@ class _HomePageState extends State<HomePage> {
     setState(() {
       _avatarImage = savedImagePath != null
           ? AssetImage(savedImagePath)
-          : AssetImage('assets/profile/profile8.png');
+          : const AssetImage('assets/profile/profile8.png');
     });
   }
 
@@ -54,9 +55,9 @@ class _HomePageState extends State<HomePage> {
       builder: (BuildContext context) {
         return Container(
           height: 300,
-          padding: EdgeInsets.all(10),
+          padding: const EdgeInsets.all(10),
           child: GridView.builder(
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 5,
               crossAxisSpacing: 10,
               mainAxisSpacing: 10,
@@ -174,6 +175,7 @@ class _HomePageState extends State<HomePage> {
           // Featured Banner
           Container(
             margin: const EdgeInsets.symmetric(vertical: 16.0),
+            height: 200,
             child: Stack(
               children: [
                 PageView.builder(
@@ -226,7 +228,6 @@ class _HomePageState extends State<HomePage> {
                 ),
               ],
             ),
-            height: 200,
           ),
 
           // Filter Buttons
@@ -249,8 +250,8 @@ class _HomePageState extends State<HomePage> {
                   value: isJapanese ? '日本語' : 'English',
                   items: ['English', '日本語']
                       .map((lang) => DropdownMenuItem(
-                            child: Text(lang),
                             value: lang,
+                            child: Text(lang),
                           ))
                       .toList(),
                   onChanged: toggleLanguage,
@@ -341,7 +342,7 @@ class _HomePageState extends State<HomePage> {
             ),
           ),
           const SizedBox(height: 10),
-          Container(
+          SizedBox(
             height: 150,
             child: ListView(
               scrollDirection: Axis.horizontal,

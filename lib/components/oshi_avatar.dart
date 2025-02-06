@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class OshiAvatar extends StatelessWidget {
   final String name;
 
-  const OshiAvatar({Key? key, required this.name}) : super(key: key);
+  const OshiAvatar({super.key, required this.name});
 
   @override
   Widget build(BuildContext context) {

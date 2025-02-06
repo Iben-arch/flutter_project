@@ -5,8 +5,9 @@ class EditOshiPage extends StatefulWidget {
   final List<String> selectedOshi;
   final List<String> oshiNames;
 
-  EditOshiPage(
-      {required this.selectedOshi,
+  const EditOshiPage(
+      {super.key,
+      required this.selectedOshi,
       required this.oshiNames,
       required List<String> oshiPaths});
 
@@ -27,7 +28,7 @@ class _EditOshiPageState extends State<EditOshiPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Edit My Oshi'),
+        title: const Text('Edit My Oshi'),
         centerTitle: true,
       ),
       body: Column(
@@ -63,7 +64,7 @@ class _EditOshiPageState extends State<EditOshiPage> {
             onPressed: () {
               Navigator.pop(context, _tempSelectedOshi);
             },
-            child: Text('Confirm'),
+            child: const Text('Confirm'),
           )
         ],
       ),

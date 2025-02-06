@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 
 class PostCard extends StatelessWidget {
@@ -11,81 +9,80 @@ class PostCard extends StatelessWidget {
   final int comments;
 
   const PostCard({
+    Key? key,
     required this.username,
     required this.imageUrl,
     required this.text,
     required this.time,
     required this.likes,
     required this.comments,
-  });
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Card(
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(16),
-      ),
-      margin: EdgeInsets.all(12.0),
-      elevation: 6,
+      margin: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
       child: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(12.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Row(
               children: [
-                CircleAvatar(
-                  radius: 20,
-                  backgroundColor: Colors.blueAccent,
-                  child: Icon(Icons.person, color: Colors.white),
+                const CircleAvatar(
+                  child: Icon(Icons.person),
                 ),
-                SizedBox(width: 12),
+                const SizedBox(width: 8),
                 Text(
                   username,
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 16,
-                  ),
+                  style: const TextStyle(fontWeight: FontWeight.bold),
                 ),
               ],
             ),
-            SizedBox(height: 12),
-            if (imageUrl.isNotEmpty)
-              ClipRRect(
-                borderRadius: BorderRadius.circular(12),
-                child: Image.asset(
+            const SizedBox(height: 10),
+            if (imageUrl.isNotEmpty) ...[
+              AspectRatio(
+                aspectRatio: 16 / 9, // อัตราส่วนของภาพ
+                child: Image.network(
                   imageUrl,
-                  height: 200,
-                  width: double.infinity,
-                  fit: BoxFit.cover,
+                  fit: BoxFit.cover, // ปรับให้ภาพเต็มพื้นที่
+                  errorBuilder: (context, error, stackTrace) {
+                    return const Center(child: Text('Failed to load image'));
+                  },
                 ),
               ),
-            SizedBox(height: 12),
+              const SizedBox(height: 10),
+            ],
+            if (text.isNotEmpty)
+              Text(
+                text,
+                style: const TextStyle(fontSize: 16),
+              ),
+            const SizedBox(height: 10),
             Text(
-              text,
-              style: TextStyle(fontSize: 14, color: Colors.black87),
+              time,
+              style: const TextStyle(color: Colors.grey, fontSize: 12),
             ),
-            SizedBox(height: 12),
+            const SizedBox(height: 10),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(
-                  time,
-                  style: TextStyle(color: Colors.grey, fontSize: 12),
+                Row(
+                  children: [
+                    const Icon(Icons.favorite_border, size: 16),
+                    const SizedBox(width: 4),
+                    Text('$likes'),
+                  ],
                 ),
                 Row(
                   children: [
-                    Icon(Icons.favorite, color: Colors.red),
-                    SizedBox(width: 6),
-                    Text(likes.toString(), style: TextStyle(fontSize: 14)),
-                    SizedBox(width: 16),
-                    Icon(Icons.comment, color: Colors.grey),
-                    SizedBox(width: 6),
-                    Text(comments.toString(), style: TextStyle(fontSize: 14)),
+                    const Icon(Icons.comment, size: 16),
+                    const SizedBox(width: 4),
+                    Text('$comments'),
                   ],
-                )
+                ),
               ],
-            )
+            ),
           ],
         ),
       ),

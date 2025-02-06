@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class SettingsScreen extends StatefulWidget {
+  const SettingsScreen({super.key});
+
   @override
   State<SettingsScreen> createState() => _SettingsScreenState();
 }
@@ -36,7 +38,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     color: Colors.white)),
             const SizedBox(height: 10),
             Container(
-              constraints: BoxConstraints(maxHeight: 35),
+              constraints: const BoxConstraints(maxHeight: 35),
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10), color: Colors.white),
               child: const ListTile(
@@ -51,11 +53,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 visualDensity: VisualDensity(vertical: -4),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 8,
             ),
             Container(
-              constraints: BoxConstraints(maxHeight: 35),
+              constraints: const BoxConstraints(maxHeight: 35),
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10), color: Colors.white),
               child: const ListTile(
@@ -79,7 +81,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     color: Colors.white)),
             const SizedBox(height: 10),
             Container(
-              constraints: BoxConstraints(maxHeight: 35),
+              constraints: const BoxConstraints(maxHeight: 35),
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10), color: Colors.white),
               child: const ListTile(
@@ -95,11 +97,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 visualDensity: VisualDensity(vertical: -4),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 8,
             ),
             Container(
-              constraints: BoxConstraints(maxHeight: 35),
+              constraints: const BoxConstraints(maxHeight: 35),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
                 color: Colors.white,
@@ -120,11 +122,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     VisualDensity(vertical: -4), // ลดความสูงของ ListTile
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 8,
             ),
             Container(
-              constraints: BoxConstraints(maxHeight: 35),
+              constraints: const BoxConstraints(maxHeight: 35),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
                 color: Colors.white,
@@ -142,11 +144,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 visualDensity: VisualDensity(vertical: -4),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 8,
             ),
             Container(
-              constraints: BoxConstraints(maxHeight: 35),
+              constraints: const BoxConstraints(maxHeight: 35),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
                 color: Colors.white,
@@ -164,11 +166,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 visualDensity: VisualDensity(vertical: -4),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 8,
             ),
             Container(
-              constraints: BoxConstraints(maxHeight: 35),
+              constraints: const BoxConstraints(maxHeight: 35),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
                 color: Colors.white,
@@ -211,7 +213,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     color: Colors.white)),
             const SizedBox(height: 10),
             Container(
-              constraints: BoxConstraints(maxHeight: 35),
+              constraints: const BoxConstraints(maxHeight: 35),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
                 color: Colors.white,
@@ -229,11 +231,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 visualDensity: VisualDensity(vertical: -4),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 8,
             ),
             Container(
-              constraints: BoxConstraints(maxHeight: 35),
+              constraints: const BoxConstraints(maxHeight: 35),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
                 color: Colors.white,
@@ -261,7 +263,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
             ),
             const SizedBox(height: 10),
             Container(
-              constraints: BoxConstraints(maxHeight: 35),
+              constraints: const BoxConstraints(maxHeight: 35),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
                 color: Colors.white,
@@ -279,11 +281,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 visualDensity: VisualDensity(vertical: -4),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 8,
             ),
             Container(
-              constraints: BoxConstraints(maxHeight: 35),
+              constraints: const BoxConstraints(maxHeight: 35),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
                 color: Colors.white,
