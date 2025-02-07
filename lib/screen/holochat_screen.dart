@@ -130,7 +130,7 @@ class _HololiveChatScreenState extends State<HololiveChatScreen> {
                 final newPost = await Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => PostPage(),
+                    builder: (context) => PostThreadPage(),
                   ),
                 );
 
