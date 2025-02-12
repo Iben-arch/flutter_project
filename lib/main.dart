@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:modern_profile/screen/splash_screen.dart';
 import 'screen/profile_screen.dart';
 
 void main(List<String> args) {
@@ -14,7 +15,7 @@ class HoloPlusApp extends StatelessWidget {
       title: 'Holoplus+',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(primarySwatch: Colors.blue),
-      home: const ProfileScreen(),
+      home: SplashScreen(),
     );
   }
 }

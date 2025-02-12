@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:modern_profile/screen/editprofile_screen.dart';
+import 'package:modern_profile/screen/splash_screen.dart';
 
 class EditOshiPage extends StatefulWidget {
   final List<String> selectedOshi;

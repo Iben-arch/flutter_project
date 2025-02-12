@@ -1,5 +1,6 @@
 import 'dart:convert'; // สำหรับแปลง JSON
 import 'package:flutter/material.dart';
+import 'package:modern_profile/constant/constant.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:modern_profile/screen/post_page.dart';
 import '../components/post_card.dart';
@@ -11,6 +12,19 @@ class HololiveChatScreen extends StatefulWidget {
 
 class _HololiveChatScreenState extends State<HololiveChatScreen> {
   List<Map<String, dynamic>> posts = []; // เก็บโพสต์
+  bool isOshiOn = false; // สถานะของปุ่ม Oshi
+  bool isAboutExpanded = false; // สถานะการแสดงรายละเอียดของ About
+  String selectedUpdate = 'Updated'; // ค่าที่เลือกของปุ่ม Updated
+  // กำหนดข้อความเริ่มต้นที่จะแสดงใน TextField
+  // ข้อความที่เราต้องการแสดงใน "About this channel"
+  String aboutText = '''Post anything about hololive!\n
+      Feel free to talk about streams, live events, merch \n
+      info, and much more\n\n
+      Consider the following and create a positive\n
+      community for everyone !\n
+      share exciting news and favorite moments\n
+      Support live concerts and events together\n
+      Report or block harmful posts form(...) on posts!''';
 
   @override
   void initState() {
@@ -38,7 +52,6 @@ class _HololiveChatScreenState extends State<HololiveChatScreen> {
     }
   }
 
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Stack(
@@ -47,57 +60,144 @@ class _HololiveChatScreenState extends State<HololiveChatScreen> {
             children: [
               // Header (แถบด้านบน)
               Container(
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    colors: [Colors.blueAccent, Colors.lightBlueAccent],
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
-                  ),
-                ),
                 padding: EdgeInsets.all(12.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                child: Column(
                   children: [
-                    ElevatedButton(
-                      onPressed: () {},
-                      child: Text('About this channel'),
-                      style: ElevatedButton.styleFrom(
-                        foregroundColor: Colors.blueAccent,
-                        backgroundColor: Colors.white,
-                        shape: RoundedRectangleBorder(
+                    GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          isAboutExpanded = !isAboutExpanded;
+                        });
+                      },
+                      child: Container(
+                        width: double.infinity,
+                        padding: EdgeInsets.symmetric(vertical: 12),
+                        alignment: Alignment.center,
+                        decoration: BoxDecoration(
+                          color: Colors.blue,
                           borderRadius: BorderRadius.circular(20),
+                        ),
+                        child: Text(
+                          'About this channel',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       ),
                     ),
-                    Row(
-                      children: [
-                        DropdownButton(
-                          value: 'English',
-                          items: [
-                            DropdownMenuItem(
-                              value: 'English',
-                              child: Text('English'),
+
+                    // กล่องข้อความสำหรับ About ที่มีข้อความเริ่มต้น
+                    if (isAboutExpanded)
+                      Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: Container(
+                          padding: EdgeInsets.all(8),
+                          decoration: BoxDecoration(
+                            color: Colors.blue, // พื้นหลังเป็นสีน้ำเงิน
+                            borderRadius: BorderRadius.circular(10),
+                            border: Border.all(color: Colors.blue),
+                          ),
+                          child: Text(
+                            aboutText, // ข้อความที่ต้องการแสดง
+                            style: TextStyle(
+                              fontSize: 12, // ขนาดตัวอักษรเล็กลง
+                              color: Colors.white, // สีตัวอักษรเป็นขาว
                             ),
-                          ],
-                          onChanged: (value) {},
+                          ),
                         ),
-                        SizedBox(width: 8),
-                        DropdownButton(
-                          value: 'Updated',
-                          items: [
-                            DropdownMenuItem(
-                              value: 'Updated',
-                              child: Text('Updated'),
+                      ),
+
+                    SizedBox(height: 8),
+
+                    // ปุ่มตัวเลือก
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        ElevatedButton.icon(
+                          onPressed: () {
+                            setState(() {
+                              isOshiOn = !isOshiOn;
+                            });
+                          },
+                          icon: Icon(
+                            Icons.filter_alt_outlined,
+                            color: isOshiOn ? Colors.white : Colors.blue,
+                          ),
+                          label: Text(
+                            isOshiOn ? 'Oshi On' : 'Oshi Off',
+                            style: TextStyle(
+                                color: isOshiOn ? Colors.white : Colors.blue),
+                          ),
+                          style: ElevatedButton.styleFrom(
+                            foregroundColor:
+                                isOshiOn ? Colors.white : Colors.blue,
+                            backgroundColor:
+                                isOshiOn ? Colors.blue : Colors.white,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(20),
+                              side: BorderSide(color: Colors.blue),
                             ),
-                            DropdownMenuItem(
-                              value: 'Newest',
-                              child: Text('Newest'),
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 8, vertical: 6),
+                          ),
+                        ),
+                        SizedBox(width: 6),
+                        ElevatedButton.icon(
+                          onPressed: () {},
+                          icon: Icon(Icons.language,
+                              color: Colors.blue, size: 18),
+                          label: Text('English',
+                              style:
+                                  TextStyle(color: Colors.blue, fontSize: 14)),
+                          style: ElevatedButton.styleFrom(
+                            foregroundColor: Colors.blue,
+                            backgroundColor: Colors.white,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(20),
+                              side: BorderSide(color: Colors.blue),
                             ),
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 8, vertical: 6),
+                          ),
+                        ),
+                        SizedBox(width: 6),
+                        PopupMenuButton<String>(
+                          onSelected: (value) {
+                            setState(() {
+                              selectedUpdate = value;
+                            });
+                          },
+                          itemBuilder: (context) => [
+                            PopupMenuItem(
+                                value: 'Updated', child: Text('Updated')),
+                            PopupMenuItem(
+                                value: 'Newest', child: Text('Newest')),
                           ],
-                          onChanged: (value) {},
+                          child: Container(
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              border: Border.all(color: Colors.blue),
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 8, vertical: 6),
+                            child: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Icon(Icons.table_rows_sharp,
+                                    color: Colors.blue, size: 18),
+                                SizedBox(width: 4),
+                                Text(selectedUpdate,
+                                    style: TextStyle(
+                                        color: Colors.blue, fontSize: 14)),
+                              ],
+                            ),
+                          ),
                         ),
                       ],
-                    )
+                    ),
                   ],
                 ),
               ),
@@ -126,23 +226,18 @@ class _HololiveChatScreenState extends State<HololiveChatScreen> {
             right: 20,
             child: FloatingActionButton(
               onPressed: () async {
-                // เปิดหน้าสร้างโพสต์และรอค่ากลับ
                 final newPost = await Navigator.push(
                   context,
-                  MaterialPageRoute(
-                    builder: (context) => PostThreadPage(),
-                  ),
+                  MaterialPageRoute(builder: (context) => PostThreadPage()),
                 );
-
-                // ถ้ามีโพสต์ใหม่ ให้เพิ่มเข้า List
                 if (newPost != null) {
                   setState(() {
-                    posts.add(newPost); // เพิ่มโพสต์ใหม่
+                    posts.add(newPost);
                   });
-                  _savePosts(); // บันทึกโพสต์ใหม่ลง SharedPreferences
+                  _savePosts();
                 }
               },
-              child: Icon(Icons.add),
+              child: Icon(Icons.filter_none_rounded, color: Colors.white),
               backgroundColor: Colors.blueAccent,
             ),
           ),

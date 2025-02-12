@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'dart:html'; // สำหรับ Flutter Web
+import 'related_talents_page.dart'; // นำเข้าหน้าสำหรับเลือก Related Talents
 
 class PostThreadPage extends StatefulWidget {
   const PostThreadPage({super.key});
@@ -12,7 +13,8 @@ class _PostThreadPageState extends State<PostThreadPage> {
   TextEditingController _titleController = TextEditingController();
   TextEditingController _detailsController = TextEditingController();
   String? _selectedImage;
-  int _currentStep = 0; // ใช้ติดตาม Step ที่เลือก
+  List<String> _relatedTalents = []; // รายการ Talent ที่เลือก
+  int _currentStep = 0;
 
   void _pickImage() {
     FileUploadInputElement uploadInput = FileUploadInputElement();
@@ -30,6 +32,21 @@ class _PostThreadPageState extends State<PostThreadPage> {
     });
   }
 
+  Future<void> _selectRelatedTalents() async {
+    final result = await Navigator.push(
+      context,
+      MaterialPageRoute(
+          builder: (context) => RelatedTalentsPage(
+                selectedTalents: [],
+              )),
+    );
+    if (result != null && result is List<String>) {
+      setState(() {
+        _relatedTalents = result;
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,16 +60,16 @@ class _PostThreadPageState extends State<PostThreadPage> {
                 icon: const Icon(Icons.arrow_back, color: Colors.blue),
                 onPressed: () {
                   setState(() {
-                    _currentStep = 0; // กลับไป Step 1
+                    _currentStep = 0;
                   });
                 },
               )
-            : null, // ซ่อนไอคอนย้อนกลับที่ Step 1
+            : null,
         actions: [
           IconButton(
             icon: const Icon(Icons.close, color: Colors.blue),
             onPressed: () {
-              Navigator.pop(context); // ปิดหน้า
+              Navigator.pop(context);
             },
           ),
         ],
@@ -66,7 +83,7 @@ class _PostThreadPageState extends State<PostThreadPage> {
           });
         },
         controlsBuilder: (context, details) {
-          return const SizedBox.shrink(); // ซ่อนปุ่ม Continue & Cancel
+          return const SizedBox.shrink();
         },
         steps: [
           Step(
@@ -115,7 +132,7 @@ class _PostThreadPageState extends State<PostThreadPage> {
                   child: ElevatedButton(
                     onPressed: () {
                       setState(() {
-                        _currentStep = 1; // ไปที่ Step 2
+                        _currentStep = 1;
                       });
                     },
                     child: const Text('Next'),
@@ -134,9 +151,14 @@ class _PostThreadPageState extends State<PostThreadPage> {
                 const SizedBox(height: 8),
                 DropdownButtonFormField<String>(
                   items: [
-                    DropdownMenuItem(value: 'General', child: Text('General')),
                     DropdownMenuItem(
-                        value: 'Discussion', child: Text('Discussion')),
+                        value: 'Steam/Video', child: Text('Steam/Video')),
+                    DropdownMenuItem(value: 'Event', child: Text('Event')),
+                    DropdownMenuItem(value: 'Collab', child: Text('Collab')),
+                    DropdownMenuItem(value: 'Clips', child: Text('Clips')),
+                    DropdownMenuItem(value: 'Fan art', child: Text('Fan art')),
+                    DropdownMenuItem(value: 'Music', child: Text('Music')),
+                    DropdownMenuItem(value: 'Merch', child: Text('Merch')),
                   ],
                   onChanged: (value) {},
                   decoration: const InputDecoration(
@@ -148,7 +170,7 @@ class _PostThreadPageState extends State<PostThreadPage> {
                 const Text('Related talents', style: TextStyle(fontSize: 16)),
                 const SizedBox(height: 8),
                 GestureDetector(
-                  onTap: () {},
+                  onTap: _selectRelatedTalents,
                   child: Container(
                     padding: const EdgeInsets.all(12),
                     decoration: BoxDecoration(
@@ -156,8 +178,12 @@ class _PostThreadPageState extends State<PostThreadPage> {
                       borderRadius: BorderRadius.circular(8),
                       border: Border.all(color: Colors.blue),
                     ),
-                    child: const Text('Related talents',
-                        style: TextStyle(color: Colors.blue)),
+                    child: Text(
+                      _relatedTalents.isEmpty
+                          ? 'Tap to select related talents'
+                          : _relatedTalents.join(', '),
+                      style: const TextStyle(color: Colors.blue),
+                    ),
                   ),
                 ),
               ],
@@ -180,6 +206,7 @@ class _PostThreadPageState extends State<PostThreadPage> {
                       'time': DateTime.now().toString(),
                       'likes': 0,
                       'comments': 0,
+                      'relatedTalents': _relatedTalents,
                     };
                     Navigator.pop(context, newPost);
                   } else {
@@ -198,7 +225,7 @@ class _PostThreadPageState extends State<PostThreadPage> {
                     style: TextStyle(color: Colors.white, fontSize: 16)),
               ),
             )
-          : null, // ซ่อนปุ่ม Post เมื่ออยู่ Step 1
+          : null,
     );
   }
 }

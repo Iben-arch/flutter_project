@@ -8,6 +8,8 @@ import '../components/oshi_avatar.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'related_talents_page.dart';
+
 class EditProfileScreen extends StatefulWidget {
   const EditProfileScreen({
     super.key,
@@ -134,6 +136,29 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
         _selectedOshi = result;
       });
       _saveSelectedOshi(result);
+    }
+  }
+
+  void _navigateToRelatedTalents() async {
+    final result = await Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => RelatedTalentsPage(
+          selectedTalents: [],
+        ),
+      ),
+    );
+
+    if (result != null && result is List<String>) {
+      setState(() {
+        // จัดลำดับโอชิที่เลือกใหม่
+        _selectedOshi = result.toSet().toList()
+          ..sort(
+              (a, b) => _oshiNames.indexOf(a).compareTo(_oshiNames.indexOf(b)));
+      });
+
+      // บันทึกข้อมูลลง SharedPreferences
+      _saveSelectedOshi(_selectedOshi);
     }
   }
 

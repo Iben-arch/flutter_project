@@ -16,6 +16,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   //////////////////////////////////////////////////////////////////////////////
   ImageProvider<Object>? _avatarImage;
+  bool isOshiOn = false; // สถานะของปุ่ม Oshi
 
   final List<String> _iconPaths = [
     'assets/profile/bear.png',
@@ -234,17 +235,35 @@ class _HomePageState extends State<HomePage> {
           Padding(
             padding: const EdgeInsets.all(16.0),
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                ElevatedButton(
-                  onPressed: () {},
+                ElevatedButton.icon(
+                  onPressed: () {
+                    setState(() {
+                      isOshiOn = !isOshiOn;
+                    });
+                  },
+                  icon: Icon(
+                    Icons.filter_alt_outlined,
+                    color: isOshiOn ? Colors.white : Colors.blue,
+                  ),
+                  label: Text(
+                    isOshiOn ? 'Oshi On' : 'Oshi Off',
+                    style:
+                        TextStyle(color: isOshiOn ? Colors.white : Colors.blue),
+                  ),
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.blue,
+                    foregroundColor: isOshiOn ? Colors.white : Colors.blue,
+                    backgroundColor: isOshiOn ? Colors.blue : Colors.white,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(20),
+                      side: BorderSide(color: Colors.blue),
                     ),
+                    padding: EdgeInsets.symmetric(horizontal: 8, vertical: 6),
                   ),
-                  child: Text(isJapanese ? '私の推しオフ' : 'My Oshi off'),
+                ),
+                SizedBox(
+                  width: 10,
                 ),
                 DropdownButton<String>(
                   value: isJapanese ? '日本語' : 'English',
@@ -386,6 +405,76 @@ class _HomePageState extends State<HomePage> {
                   },
                 ),
               ],
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            child: Text(
+              isJapanese ? '' : 'Send in your requests!',
+              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            child: Text(
+              isJapanese ? '' : 'My hololive friends with u',
+              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            child: Text(
+              isJapanese ? '' : 'Merch',
+              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            child: Text(
+              isJapanese ? '' : 'Hololive Plus',
+              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            child: Text(
+              isJapanese ? '' : 'holoplus Lab',
+              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            child: Text(
+              isJapanese ? '' : 'Celebration',
+              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            child: Text(
+              isJapanese ? '' : 'Music',
+              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            child: Text(
+              isJapanese ? '' : 'Media',
+              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            child: Text(
+              isJapanese ? '' : 'Updates & Releases',
+              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            child: Text(
+              isJapanese ? '' : 'Start here',
+              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
           ),
         ],
