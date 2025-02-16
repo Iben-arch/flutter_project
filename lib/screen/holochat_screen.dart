@@ -1,8 +1,11 @@
 import 'dart:convert'; // สำหรับแปลง JSON
+
 import 'package:flutter/material.dart';
 import 'package:modern_profile/constant/constant.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:modern_profile/screen/post_page.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:uuid/uuid.dart';
+
 import '../components/post_card.dart';
 
 class HololiveChatScreen extends StatefulWidget {
@@ -32,6 +35,7 @@ class _HololiveChatScreenState extends State<HololiveChatScreen> {
     _loadPosts(); // โหลดโพสต์จาก SharedPreferences เมื่อเปิดหน้า
   }
 
+  final uuid = Uuid();
   // ฟังก์ชันบันทึกโพสต์ลง SharedPreferences
   Future<void> _savePosts() async {
     final prefs = await SharedPreferences.getInstance();
@@ -43,12 +47,13 @@ class _HololiveChatScreenState extends State<HololiveChatScreen> {
   // ฟังก์ชันโหลดโพสต์จาก SharedPreferences
   Future<void> _loadPosts() async {
     final prefs = await SharedPreferences.getInstance();
-    final postsJson =
-        prefs.getString('posts'); // ดึง JSON String จาก SharedPreferences
-    if (postsJson != null) {
+    final postsJson = prefs.getString('posts');
+    if (postsJson != null && postsJson.isNotEmpty) {
       setState(() {
         posts = List<Map<String, dynamic>>.from(jsonDecode(postsJson));
       });
+    } else {
+      posts = []; // ตั้งค่าเริ่มต้นเป็น List ว่าง
     }
   }
 
@@ -208,6 +213,7 @@ class _HololiveChatScreenState extends State<HololiveChatScreen> {
                   itemBuilder: (context, index) {
                     final post = posts[index];
                     return PostCard(
+                      id: post['id'], // ใช้ id จากข้อมูลโพสต์
                       username: post['username'],
                       imageUrl: post['imageUrl'],
                       text: post['text'],
@@ -232,9 +238,10 @@ class _HololiveChatScreenState extends State<HololiveChatScreen> {
                 );
                 if (newPost != null) {
                   setState(() {
+                    newPost['id'] = uuid.v4(); // กำหนด id ให้โพสต์ใหม่
                     posts.add(newPost);
                   });
-                  _savePosts();
+                  _savePosts(); // บันทึกโพสต์ลง SharedPreferences
                 }
               },
               child: Icon(Icons.filter_none_rounded, color: Colors.white),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'dart:html'; // สำหรับ Flutter Web
+import 'package:uuid/uuid.dart';
 import 'related_talents_page.dart'; // นำเข้าหน้าสำหรับเลือก Related Talents
 
 class PostThreadPage extends StatefulWidget {
@@ -10,11 +11,12 @@ class PostThreadPage extends StatefulWidget {
 }
 
 class _PostThreadPageState extends State<PostThreadPage> {
-  TextEditingController _titleController = TextEditingController();
-  TextEditingController _detailsController = TextEditingController();
+  final TextEditingController _titleController = TextEditingController();
+  final TextEditingController _detailsController = TextEditingController();
   String? _selectedImage;
   List<String> _relatedTalents = []; // รายการ Talent ที่เลือก
   int _currentStep = 0;
+  final Uuid uuid = Uuid(); // สำหรับสร้าง ID
 
   void _pickImage() {
     FileUploadInputElement uploadInput = FileUploadInputElement();
@@ -152,7 +154,7 @@ class _PostThreadPageState extends State<PostThreadPage> {
                 DropdownButtonFormField<String>(
                   items: [
                     DropdownMenuItem(
-                        value: 'Steam/Video', child: Text('Steam/Video')),
+                        value: 'Stream/Video', child: Text('Stream/Video')),
                     DropdownMenuItem(value: 'Event', child: Text('Event')),
                     DropdownMenuItem(value: 'Collab', child: Text('Collab')),
                     DropdownMenuItem(value: 'Clips', child: Text('Clips')),
@@ -200,6 +202,7 @@ class _PostThreadPageState extends State<PostThreadPage> {
                   if (_titleController.text.isNotEmpty &&
                       _detailsController.text.isNotEmpty) {
                     Map<String, dynamic> newPost = {
+                      'Id': uuid.v4(), // ใช้ UUID เป็นค่า ID
                       'username': 'You',
                       'imageUrl': _selectedImage ?? '',
                       'text': _titleController.text,

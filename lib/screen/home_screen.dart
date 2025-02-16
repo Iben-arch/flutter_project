@@ -6,6 +6,9 @@ import '../components/home_img.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'post_detail_page.dart';
+import 'post_screen.dart';
+
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
@@ -152,6 +155,322 @@ class _HomePageState extends State<HomePage> {
     }
   }
 
+  List<Map<String, dynamic>> posts = [
+    {
+      'username': 'Hololive Official',
+      'imageUrl': 'assets/images/featured0.jpg',
+      'text': 'Sakamata Chloe\'s final stream',
+      'time': '2 hours ago',
+      'likes': 120,
+      'comments': [],
+    },
+    {
+      'username': 'Hololive Official',
+      'imageUrl': 'assets/images/featured00.jpg',
+      'text': "Today is Mococo Abyssgaurd's Birthday",
+      'time': '5 hours ago',
+      'likes': 200,
+      'comments': [],
+    },
+    {
+      'username': 'Hololive Official',
+      'imageUrl': 'assets/images/featured1.jpg',
+      'text': 'Sakamata Chloe\'s final stream',
+      'time': '2 hours ago',
+      'likes': 200,
+      'comments': [],
+    },
+  ];
+  List<Map<String, dynamic>> posts1 = [
+    {
+      'username': 'Hololive Official',
+      'imageUrl': 'assets/images/featured3.jpg',
+      'text': 'Additionnal general ticket sales starts SOON hololive 6th fes.',
+      'time': '1 hours ago',
+      'likes': 500,
+      'comments': [],
+    },
+    {
+      'username': 'Hololive Official',
+      'imageUrl': 'assets/images/featured4.jpg',
+      'text': "Get ready for moona Hoshinova's 3D Birthday LIVE!!",
+      'time': '3 hours ago',
+      'likes': 50,
+      'comments': [],
+    },
+    {
+      'username': 'Hololive Official',
+      'imageUrl': 'assets/images/featured5.jpg',
+      'text': 'Check out the digital message boards for FBKINGDOM "ANTHEM"',
+      'time': '1 week ago',
+      'likes': 140,
+      'comments': [],
+    },
+  ];
+
+  List<Map<String, dynamic>> posts2 = [
+    {
+      'username': 'Hololive Official',
+      'imageUrl': 'assets/images/featured6.jpg',
+      'text': 'Share your post-live thoughts for "SuperNova"',
+      'time': '1 hours ago',
+      'likes': 500,
+      'comments': [],
+    },
+    {
+      'username': 'Hololive Official',
+      'imageUrl': 'assets/images/featured7.jpg',
+      'text':
+          "Post-live chat How was Hoshimachi Suisei's 'Spectra of Nova' at Ookini Arena Maishima?",
+      'time': '3 hours ago',
+      'likes': 50,
+      'comments': [],
+    },
+  ];
+
+  List<Map<String, dynamic>> posts3 = [
+    {
+      'username': 'Hololive Official',
+      'imageUrl': 'assets/images/featured31.jpg',
+      'text': 'Day 17 since my oshi Chloe graduated',
+      'time': '1 hours ago',
+      'likes': 500,
+      'comments': [],
+    },
+    {
+      'username': 'Hololive Official',
+      'imageUrl': 'assets/images/featured32.jpg',
+      'text': "What are you doing?",
+      'time': '3 hours ago',
+      'likes': 50,
+      'comments': [],
+    },
+    {
+      'username': 'Hololive Official',
+      'imageUrl': 'assets/images/featured33.jpg',
+      'text': "Can't have to many Irys",
+      'time': '1 week ago',
+      'likes': 140,
+      'comments': [],
+    },
+  ];
+
+  List<Map<String, dynamic>> posts4 = [
+    {
+      'username': 'Hololive Official',
+      'imageUrl': 'assets/images/featured41.jpg',
+      'text': 'New TCG collections available in the USA',
+      'time': '1 hours ago',
+      'likes': 500,
+      'comments': [],
+    },
+    {
+      'username': 'Hololive Official',
+      'imageUrl': 'assets/images/featured42.jpg',
+      'text': '"Comfy Snow-Watching Inn" ASMR voice pack available!!',
+      'time': '3 hours ago',
+      'likes': 50,
+      'comments': [],
+    },
+    {
+      'username': 'Hololive Official',
+      'imageUrl': 'assets/images/featured_banner2.jpg',
+      'text': 'Mori Calliope "Grimoire" merch available TODAY!!',
+      'time': '1 week ago',
+      'likes': 140,
+      'comments': [],
+    },
+  ];
+
+  List<Map<String, dynamic>> posts5 = [
+    {
+      'username': 'Hololive Official',
+      'imageUrl': 'assets/images/featured3.jpg',
+      'text': 'Additionnal general ticket sales starts SOON hololive 6th fes.',
+      'time': '1 hours ago',
+      'likes': 500,
+      'comments': [],
+    },
+    {
+      'username': 'Hololive Official',
+      'imageUrl': 'assets/images/featured4.jpg',
+      'text': "Get ready for moona Hoshinova's 3D Birthday LIVE!!",
+      'time': '3 hours ago',
+      'likes': 50,
+      'comments': [],
+    },
+    {
+      'username': 'Hololive Official',
+      'imageUrl': 'assets/images/featured5.jpg',
+      'text': 'Check out the digital message boards for FBKINGDOM "ANTHEM"',
+      'time': '1 week ago',
+      'likes': 140,
+      'comments': [],
+    },
+  ];
+
+  List<Map<String, dynamic>> posts6 = [
+    {
+      'username': 'Hololive Official',
+      'imageUrl': 'assets/images/featured3.jpg',
+      'text': 'Additionnal general ticket sales starts SOON hololive 6th fes.',
+      'time': '1 hours ago',
+      'likes': 500,
+      'comments': [],
+    },
+    {
+      'username': 'Hololive Official',
+      'imageUrl': 'assets/images/featured4.jpg',
+      'text': "Get ready for moona Hoshinova's 3D Birthday LIVE!!",
+      'time': '3 hours ago',
+      'likes': 50,
+      'comments': [],
+    },
+    {
+      'username': 'Hololive Official',
+      'imageUrl': 'assets/images/featured5.jpg',
+      'text': 'Check out the digital message boards for FBKINGDOM "ANTHEM"',
+      'time': '1 week ago',
+      'likes': 140,
+      'comments': [],
+    },
+  ];
+
+  List<Map<String, dynamic>> posts7 = [
+    {
+      'username': 'Hololive Official',
+      'imageUrl': 'assets/images/featured3.jpg',
+      'text': 'Additionnal general ticket sales starts SOON hololive 6th fes.',
+      'time': '1 hours ago',
+      'likes': 500,
+      'comments': [],
+    },
+    {
+      'username': 'Hololive Official',
+      'imageUrl': 'assets/images/featured4.jpg',
+      'text': "Get ready for moona Hoshinova's 3D Birthday LIVE!!",
+      'time': '3 hours ago',
+      'likes': 50,
+      'comments': [],
+    },
+    {
+      'username': 'Hololive Official',
+      'imageUrl': 'assets/images/featured5.jpg',
+      'text': 'Check out the digital message boards for FBKINGDOM "ANTHEM"',
+      'time': '1 week ago',
+      'likes': 140,
+      'comments': [],
+    },
+  ];
+
+  List<Map<String, dynamic>> posts8 = [
+    {
+      'username': 'Hololive Official',
+      'imageUrl': 'assets/images/featured3.jpg',
+      'text': 'Additionnal general ticket sales starts SOON hololive 6th fes.',
+      'time': '1 hours ago',
+      'likes': 500,
+      'comments': [],
+    },
+    {
+      'username': 'Hololive Official',
+      'imageUrl': 'assets/images/featured4.jpg',
+      'text': "Get ready for moona Hoshinova's 3D Birthday LIVE!!",
+      'time': '3 hours ago',
+      'likes': 50,
+      'comments': [],
+    },
+    {
+      'username': 'Hololive Official',
+      'imageUrl': 'assets/images/featured5.jpg',
+      'text': 'Check out the digital message boards for FBKINGDOM "ANTHEM"',
+      'time': '1 week ago',
+      'likes': 140,
+      'comments': [],
+    },
+  ];
+
+  List<Map<String, dynamic>> posts9 = [
+    {
+      'username': 'Hololive Official',
+      'imageUrl': 'assets/images/featured3.jpg',
+      'text': 'Additionnal general ticket sales starts SOON hololive 6th fes.',
+      'time': '1 hours ago',
+      'likes': 500,
+      'comments': [],
+    },
+    {
+      'username': 'Hololive Official',
+      'imageUrl': 'assets/images/featured4.jpg',
+      'text': "Get ready for moona Hoshinova's 3D Birthday LIVE!!",
+      'time': '3 hours ago',
+      'likes': 50,
+      'comments': [],
+    },
+    {
+      'username': 'Hololive Official',
+      'imageUrl': 'assets/images/featured5.jpg',
+      'text': 'Check out the digital message boards for FBKINGDOM "ANTHEM"',
+      'time': '1 week ago',
+      'likes': 140,
+      'comments': [],
+    },
+  ];
+
+  List<Map<String, dynamic>> posts10 = [
+    {
+      'username': 'Hololive Official',
+      'imageUrl': 'assets/images/featured3.jpg',
+      'text': 'Additionnal general ticket sales starts SOON hololive 6th fes.',
+      'time': '1 hours ago',
+      'likes': 500,
+      'comments': [],
+    },
+    {
+      'username': 'Hololive Official',
+      'imageUrl': 'assets/images/featured4.jpg',
+      'text': "Get ready for moona Hoshinova's 3D Birthday LIVE!!",
+      'time': '3 hours ago',
+      'likes': 50,
+      'comments': [],
+    },
+    {
+      'username': 'Hololive Official',
+      'imageUrl': 'assets/images/featured5.jpg',
+      'text': 'Check out the digital message boards for FBKINGDOM "ANTHEM"',
+      'time': '1 week ago',
+      'likes': 140,
+      'comments': [],
+    },
+  ];
+
+  List<Map<String, dynamic>> posts11 = [
+    {
+      'username': 'Hololive Official',
+      'imageUrl': 'assets/images/featured3.jpg',
+      'text': 'Additionnal general ticket sales starts SOON hololive 6th fes.',
+      'time': '1 hours ago',
+      'likes': 500,
+      'comments': [],
+    },
+    {
+      'username': 'Hololive Official',
+      'imageUrl': 'assets/images/featured4.jpg',
+      'text': "Get ready for moona Hoshinova's 3D Birthday LIVE!!",
+      'time': '3 hours ago',
+      'likes': 50,
+      'comments': [],
+    },
+    {
+      'username': 'Hololive Official',
+      'imageUrl': 'assets/images/featured5.jpg',
+      'text': 'Check out the digital message boards for FBKINGDOM "ANTHEM"',
+      'time': '1 week ago',
+      'likes': 140,
+      'comments': [],
+    },
+  ];
+
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -257,23 +576,40 @@ class _HomePageState extends State<HomePage> {
                     backgroundColor: isOshiOn ? Colors.blue : Colors.white,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(20),
-                      side: BorderSide(color: Colors.blue),
+                      side: const BorderSide(color: Colors.blue),
                     ),
-                    padding: EdgeInsets.symmetric(horizontal: 8, vertical: 6),
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 10,
                 ),
-                DropdownButton<String>(
-                  value: isJapanese ? '日本語' : 'English',
-                  items: ['English', '日本語']
-                      .map((lang) => DropdownMenuItem(
-                            value: lang,
-                            child: Text(lang),
-                          ))
-                      .toList(),
-                  onChanged: toggleLanguage,
+                ElevatedButton.icon(
+                  onPressed: () {
+                    setState(() {
+                      isJapanese = !isJapanese;
+                    });
+                  },
+                  icon: Icon(
+                    Icons.language,
+                    color: isJapanese ? Colors.white : Colors.blue,
+                  ),
+                  label: Text(
+                    isJapanese ? '日本語' : 'English',
+                    style: TextStyle(
+                        color: isJapanese ? Colors.white : Colors.blue),
+                  ),
+                  style: ElevatedButton.styleFrom(
+                    foregroundColor: isJapanese ? Colors.white : Colors.blue,
+                    backgroundColor: isJapanese ? Colors.blue : Colors.white,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20),
+                      side: const BorderSide(color: Colors.blue),
+                    ),
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
+                  ),
                 ),
               ],
             ),
@@ -288,68 +624,47 @@ class _HomePageState extends State<HomePage> {
             ),
           ),
           const SizedBox(height: 10),
-          Container(
-            margin: const EdgeInsets.symmetric(horizontal: 16.0),
-            padding: const EdgeInsets.all(16.0),
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(12),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black.withOpacity(0.1),
-                  blurRadius: 10,
-                  offset: const Offset(0, 5),
-                ),
-              ],
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  children: [
-                    const Icon(Icons.new_releases, color: Colors.orange),
-                    const SizedBox(width: 8),
-                    Expanded(
-                      child: Text(
-                        isJapanese
-                            ? '新しいホロライブのマインクラフトサーバー'
-                            : 'New hololive Minecraft Server',
-                        style: const TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
+          SizedBox(
+            height: 150,
+            child: ListView.builder(
+              scrollDirection: Axis.horizontal,
+              itemCount: posts1.length,
+              itemBuilder: (context, index) {
+                return GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => PostDetail(post: posts1[index]),
+                      ),
+                    );
+                  },
+                  child: Container(
+                    width: 200,
+                    margin: const EdgeInsets.symmetric(horizontal: 8.0),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(12),
+                      image: DecorationImage(
+                        image: AssetImage(posts1[index]['imageUrl']),
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                    child: Align(
+                      alignment: Alignment.bottomCenter,
+                      child: Container(
+                        padding: const EdgeInsets.all(8.0),
+                        color: Colors.black.withOpacity(0.6),
+                        child: Text(
+                          posts1[index]['text'],
+                          style: const TextStyle(color: Colors.white),
                         ),
                       ),
                     ),
-                  ],
-                ),
-                const SizedBox(height: 8),
-                Text(
-                  isJapanese
-                      ? 'ホロライブ専用の新しいサーバー...'
-                      : 'A brand new server exclusively for hololive...',
-                  style: const TextStyle(color: Colors.grey),
-                ),
-                const SizedBox(height: 10),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      isJapanese ? 'わあ、楽しみ〜〜〜' : 'wow, I can\'t wait to see~~~',
-                      style: const TextStyle(fontStyle: FontStyle.italic),
-                    ),
-                    const Row(
-                      children: [
-                        Icon(Icons.favorite, color: Colors.red),
-                        SizedBox(width: 5),
-                        Text('3,370'),
-                      ],
-                    )
-                  ],
-                )
-              ],
+                  ),
+                );
+              },
             ),
           ),
-
           const SizedBox(height: 20),
 
           // Featured Section
@@ -363,120 +678,547 @@ class _HomePageState extends State<HomePage> {
           const SizedBox(height: 10),
           SizedBox(
             height: 150,
-            child: ListView(
+            child: ListView.builder(
               scrollDirection: Axis.horizontal,
-              children: [
-                FeaturedCard(
-                  image: 'assets/images/featured1.jpg',
-                  title: isJapanese
-                      ? '沙花叉クロエの卒業配信'
-                      : 'Sakamata Chloe\'s final stream',
+              itemCount: posts.length,
+              itemBuilder: (context, index) {
+                return GestureDetector(
                   onTap: () {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => DetailPage(
-                          title: isJapanese
-                              ? '沙花叉クロエの卒業配信'
-                              : 'Sakamata Chloe\'s final stream',
-                          image: 'assets/images/featured1.jpg',
-                        ),
+                        builder: (context) => PostDetail(post: posts[index]),
                       ),
                     );
                   },
-                ),
-                FeaturedCard(
-                  image: 'assets/images/featured2.jpg',
-                  title: isJapanese
-                      ? '「ホロライブEnglish -Myth-」がAVIOT VTuber POP UP SHOP in OIOIに登場！'
-                      : 'hololive English -Myth- New Merchandise will be available at AVIOT VTuber POP UP SHOP in OIOIt',
+                  child: Container(
+                    width: 200,
+                    margin: const EdgeInsets.symmetric(horizontal: 8.0),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(12),
+                      image: DecorationImage(
+                        image: AssetImage(posts[index]['imageUrl']),
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                    child: Align(
+                      alignment: Alignment.bottomCenter,
+                      child: Container(
+                        padding: const EdgeInsets.all(8.0),
+                        color: Colors.black.withOpacity(0.6),
+                        child: Text(
+                          posts[index]['text'],
+                          style: const TextStyle(color: Colors.white),
+                        ),
+                      ),
+                    ),
+                  ),
+                );
+              },
+            ),
+          ),
+          SizedBox(
+            height: 20,
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            child: Text(
+              isJapanese ? 'リクエストを送ってください！' : 'Send in your requests!',
+              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            ),
+          ),
+          const SizedBox(height: 10),
+          SizedBox(
+            height: 150,
+            child: ListView.builder(
+              scrollDirection: Axis.horizontal,
+              itemCount: posts2.length,
+              itemBuilder: (context, index) {
+                return GestureDetector(
                   onTap: () {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => DetailPage(
-                          title: isJapanese
-                              ? '「ホロライブEnglish -Myth-」がAVIOT VTuber POP UP SHOP in OIOIに登場！'
-                              : 'hololive English -Myth- New Merchandise will be available at AVIOT VTuber POP UP SHOP in OIOI',
-                          image: 'assets/images/featured2.jpg',
-                        ),
+                        builder: (context) => PostDetail(post: posts2[index]),
                       ),
                     );
                   },
-                ),
-              ],
+                  child: Container(
+                    width: 200,
+                    margin: const EdgeInsets.symmetric(horizontal: 8.0),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(12),
+                      image: DecorationImage(
+                        image: AssetImage(posts2[index]['imageUrl']),
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                    child: Align(
+                      alignment: Alignment.bottomCenter,
+                      child: Container(
+                        padding: const EdgeInsets.all(8.0),
+                        color: Colors.black.withOpacity(0.6),
+                        child: Text(
+                          posts2[index]['text'],
+                          style: const TextStyle(color: Colors.white),
+                        ),
+                      ),
+                    ),
+                  ),
+                );
+              },
             ),
           ),
+          const SizedBox(height: 20),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16.0),
             child: Text(
-              isJapanese ? '' : 'Send in your requests!',
+              isJapanese ? 'ホロライブの友達と一緒に' : 'My hololive friends with u',
               style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
           ),
+          const SizedBox(height: 10),
+          SizedBox(
+            height: 150,
+            child: ListView.builder(
+              scrollDirection: Axis.horizontal,
+              itemCount: posts3.length,
+              itemBuilder: (context, index) {
+                return GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => PostDetail(post: posts3[index]),
+                      ),
+                    );
+                  },
+                  child: Container(
+                    width: 200,
+                    margin: const EdgeInsets.symmetric(horizontal: 8.0),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(12),
+                      image: DecorationImage(
+                        image: AssetImage(posts3[index]['imageUrl']),
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                    child: Align(
+                      alignment: Alignment.bottomCenter,
+                      child: Container(
+                        padding: const EdgeInsets.all(8.0),
+                        color: Colors.black.withOpacity(0.6),
+                        child: Text(
+                          posts3[index]['text'],
+                          style: const TextStyle(color: Colors.white),
+                        ),
+                      ),
+                    ),
+                  ),
+                );
+              },
+            ),
+          ),
+          const SizedBox(height: 20),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16.0),
             child: Text(
-              isJapanese ? '' : 'My hololive friends with u',
+              isJapanese ? 'グッズ' : 'Merch',
               style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0),
-            child: Text(
-              isJapanese ? '' : 'Merch',
-              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+          const SizedBox(height: 10),
+          SizedBox(
+            height: 150,
+            child: ListView.builder(
+              scrollDirection: Axis.horizontal,
+              itemCount: posts4.length,
+              itemBuilder: (context, index) {
+                return GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => PostDetail(post: posts4[index]),
+                      ),
+                    );
+                  },
+                  child: Container(
+                    width: 200,
+                    margin: const EdgeInsets.symmetric(horizontal: 8.0),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(12),
+                      image: DecorationImage(
+                        image: AssetImage(posts4[index]['imageUrl']),
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                    child: Align(
+                      alignment: Alignment.bottomCenter,
+                      child: Container(
+                        padding: const EdgeInsets.all(8.0),
+                        color: Colors.black.withOpacity(0.6),
+                        child: Text(
+                          posts4[index]['text'],
+                          style: const TextStyle(color: Colors.white),
+                        ),
+                      ),
+                    ),
+                  ),
+                );
+              },
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0),
-            child: Text(
-              isJapanese ? '' : 'Hololive Plus',
-              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0),
-            child: Text(
-              isJapanese ? '' : 'holoplus Lab',
-              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0),
-            child: Text(
-              isJapanese ? '' : 'Celebration',
-              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0),
-            child: Text(
-              isJapanese ? '' : 'Music',
-              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0),
-            child: Text(
-              isJapanese ? '' : 'Media',
-              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0),
-            child: Text(
-              isJapanese ? '' : 'Updates & Releases',
-              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0),
-            child: Text(
-              isJapanese ? '' : 'Start here',
-              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-            ),
-          ),
+          // const SizedBox(height: 20),
+          // Padding(
+          //   padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          //   child: Text(
+          //     isJapanese ? 'ホロライブプラス' : 'Hololive Plus',
+          //     style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+          //   ),
+          // ),
+          // const SizedBox(height: 10),
+          // SizedBox(
+          //   height: 150,
+          //   child: ListView.builder(
+          //     scrollDirection: Axis.horizontal,
+          //     itemCount: posts5.length,
+          //     itemBuilder: (context, index) {
+          //       return GestureDetector(
+          //         onTap: () {
+          //           Navigator.push(
+          //             context,
+          //             MaterialPageRoute(
+          //               builder: (context) => PostDetail(post: posts5[index]),
+          //             ),
+          //           );
+          //         },
+          //         child: Container(
+          //           width: 200,
+          //           margin: const EdgeInsets.symmetric(horizontal: 8.0),
+          //           decoration: BoxDecoration(
+          //             borderRadius: BorderRadius.circular(12),
+          //             image: DecorationImage(
+          //               image: AssetImage(posts5[index]['imageUrl']),
+          //               fit: BoxFit.cover,
+          //             ),
+          //           ),
+          //           child: Align(
+          //             alignment: Alignment.bottomCenter,
+          //             child: Container(
+          //               padding: const EdgeInsets.all(8.0),
+          //               color: Colors.black.withOpacity(0.6),
+          //               child: Text(
+          //                 posts5[index]['text'],
+          //                 style: const TextStyle(color: Colors.white),
+          //               ),
+          //             ),
+          //           ),
+          //         ),
+          //       );
+          //     },
+          //   ),
+          // ),
+          // const SizedBox(height: 20),
+          // Padding(
+          //   padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          //   child: Text(
+          //     isJapanese ? 'ホロプラスラボ' : 'holoplus Lab',
+          //     style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+          //   ),
+          // ),
+          // const SizedBox(height: 10),
+          // SizedBox(
+          //   height: 150,
+          //   child: ListView.builder(
+          //     scrollDirection: Axis.horizontal,
+          //     itemCount: posts6.length,
+          //     itemBuilder: (context, index) {
+          //       return GestureDetector(
+          //         onTap: () {
+          //           Navigator.push(
+          //             context,
+          //             MaterialPageRoute(
+          //               builder: (context) => PostDetail(post: posts6[index]),
+          //             ),
+          //           );
+          //         },
+          //         child: Container(
+          //           width: 200,
+          //           margin: const EdgeInsets.symmetric(horizontal: 8.0),
+          //           decoration: BoxDecoration(
+          //             borderRadius: BorderRadius.circular(12),
+          //             image: DecorationImage(
+          //               image: AssetImage(posts6[index]['imageUrl']),
+          //               fit: BoxFit.cover,
+          //             ),
+          //           ),
+          //           child: Align(
+          //             alignment: Alignment.bottomCenter,
+          //             child: Container(
+          //               padding: const EdgeInsets.all(8.0),
+          //               color: Colors.black.withOpacity(0.6),
+          //               child: Text(
+          //                 posts6[index]['text'],
+          //                 style: const TextStyle(color: Colors.white),
+          //               ),
+          //             ),
+          //           ),
+          //         ),
+          //       );
+          //     },
+          //   ),
+          // ),
+          // const SizedBox(height: 20),
+          // Padding(
+          //   padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          //   child: Text(
+          //     isJapanese ? 'お祝い' : 'Celebration',
+          //     style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+          //   ),
+          // ),
+          // const SizedBox(height: 10),
+          // SizedBox(
+          //   height: 150,
+          //   child: ListView.builder(
+          //     scrollDirection: Axis.horizontal,
+          //     itemCount: posts7.length,
+          //     itemBuilder: (context, index) {
+          //       return GestureDetector(
+          //         onTap: () {
+          //           Navigator.push(
+          //             context,
+          //             MaterialPageRoute(
+          //               builder: (context) => PostDetail(post: posts7[index]),
+          //             ),
+          //           );
+          //         },
+          //         child: Container(
+          //           width: 200,
+          //           margin: const EdgeInsets.symmetric(horizontal: 8.0),
+          //           decoration: BoxDecoration(
+          //             borderRadius: BorderRadius.circular(12),
+          //             image: DecorationImage(
+          //               image: AssetImage(posts7[index]['imageUrl']),
+          //               fit: BoxFit.cover,
+          //             ),
+          //           ),
+          //           child: Align(
+          //             alignment: Alignment.bottomCenter,
+          //             child: Container(
+          //               padding: const EdgeInsets.all(8.0),
+          //               color: Colors.black.withOpacity(0.6),
+          //               child: Text(
+          //                 posts7[index]['text'],
+          //                 style: const TextStyle(color: Colors.white),
+          //               ),
+          //             ),
+          //           ),
+          //         ),
+          //       );
+          //     },
+          //   ),
+          // ),
+          // const SizedBox(height: 20),
+          // Padding(
+          //   padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          //   child: Text(
+          //     isJapanese ? '音楽' : 'Music',
+          //     style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+          //   ),
+          // ),
+          // const SizedBox(height: 10),
+          // SizedBox(
+          //   height: 150,
+          //   child: ListView.builder(
+          //     scrollDirection: Axis.horizontal,
+          //     itemCount: posts8.length,
+          //     itemBuilder: (context, index) {
+          //       return GestureDetector(
+          //         onTap: () {
+          //           Navigator.push(
+          //             context,
+          //             MaterialPageRoute(
+          //               builder: (context) => PostDetail(post: posts8[index]),
+          //             ),
+          //           );
+          //         },
+          //         child: Container(
+          //           width: 200,
+          //           margin: const EdgeInsets.symmetric(horizontal: 8.0),
+          //           decoration: BoxDecoration(
+          //             borderRadius: BorderRadius.circular(12),
+          //             image: DecorationImage(
+          //               image: AssetImage(posts8[index]['imageUrl']),
+          //               fit: BoxFit.cover,
+          //             ),
+          //           ),
+          //           child: Align(
+          //             alignment: Alignment.bottomCenter,
+          //             child: Container(
+          //               padding: const EdgeInsets.all(8.0),
+          //               color: Colors.black.withOpacity(0.6),
+          //               child: Text(
+          //                 posts8[index]['text'],
+          //                 style: const TextStyle(color: Colors.white),
+          //               ),
+          //             ),
+          //           ),
+          //         ),
+          //       );
+          //     },
+          //   ),
+          // ),
+          // const SizedBox(height: 20),
+          // Padding(
+          //   padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          //   child: Text(
+          //     isJapanese ? 'メディア' : 'Media',
+          //     style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+          //   ),
+          // ),
+          // const SizedBox(height: 10),
+          // SizedBox(
+          //   height: 150,
+          //   child: ListView.builder(
+          //     scrollDirection: Axis.horizontal,
+          //     itemCount: posts9.length,
+          //     itemBuilder: (context, index) {
+          //       return GestureDetector(
+          //         onTap: () {
+          //           Navigator.push(
+          //             context,
+          //             MaterialPageRoute(
+          //               builder: (context) => PostDetail(post: posts9[index]),
+          //             ),
+          //           );
+          //         },
+          //         child: Container(
+          //           width: 200,
+          //           margin: const EdgeInsets.symmetric(horizontal: 8.0),
+          //           decoration: BoxDecoration(
+          //             borderRadius: BorderRadius.circular(12),
+          //             image: DecorationImage(
+          //               image: AssetImage(posts9[index]['imageUrl']),
+          //               fit: BoxFit.cover,
+          //             ),
+          //           ),
+          //           child: Align(
+          //             alignment: Alignment.bottomCenter,
+          //             child: Container(
+          //               padding: const EdgeInsets.all(8.0),
+          //               color: Colors.black.withOpacity(0.6),
+          //               child: Text(
+          //                 posts9[index]['text'],
+          //                 style: const TextStyle(color: Colors.white),
+          //               ),
+          //             ),
+          //           ),
+          //         ),
+          //       );
+          //     },
+          //   ),
+          // ),
+          // const SizedBox(height: 20),
+          // Padding(
+          //   padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          //   child: Text(
+          //     isJapanese ? 'アップデートとリリース' : 'Updates & Releases',
+          //     style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+          //   ),
+          // ),
+          // const SizedBox(height: 10),
+          // SizedBox(
+          //   height: 150,
+          //   child: ListView.builder(
+          //     scrollDirection: Axis.horizontal,
+          //     itemCount: posts10.length,
+          //     itemBuilder: (context, index) {
+          //       return GestureDetector(
+          //         onTap: () {
+          //           Navigator.push(
+          //             context,
+          //             MaterialPageRoute(
+          //               builder: (context) => PostDetail(post: posts10[index]),
+          //             ),
+          //           );
+          //         },
+          //         child: Container(
+          //           width: 200,
+          //           margin: const EdgeInsets.symmetric(horizontal: 8.0),
+          //           decoration: BoxDecoration(
+          //             borderRadius: BorderRadius.circular(12),
+          //             image: DecorationImage(
+          //               image: AssetImage(posts10[index]['imageUrl']),
+          //               fit: BoxFit.cover,
+          //             ),
+          //           ),
+          //           child: Align(
+          //             alignment: Alignment.bottomCenter,
+          //             child: Container(
+          //               padding: const EdgeInsets.all(8.0),
+          //               color: Colors.black.withOpacity(0.6),
+          //               child: Text(
+          //                 posts10[index]['text'],
+          //                 style: const TextStyle(color: Colors.white),
+          //               ),
+          //             ),
+          //           ),
+          //         ),
+          //       );
+          //     },
+          //   ),
+          // ),
+          // const SizedBox(height: 20),
+          // Padding(
+          //   padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          //   child: Text(
+          //     isJapanese ? 'ここから始めましょう' : 'Start here',
+          //     style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+          //   ),
+          // ),
+          // const SizedBox(height: 10),
+          // SizedBox(
+          //   height: 150,
+          //   child: ListView.builder(
+          //     scrollDirection: Axis.horizontal,
+          //     itemCount: posts11.length,
+          //     itemBuilder: (context, index) {
+          //       return GestureDetector(
+          //         onTap: () {
+          //           Navigator.push(
+          //             context,
+          //             MaterialPageRoute(
+          //               builder: (context) => PostDetail(post: posts11[index]),
+          //             ),
+          //           );
+          //         },
+          //         child: Container(
+          //           width: 200,
+          //           margin: const EdgeInsets.symmetric(horizontal: 8.0),
+          //           decoration: BoxDecoration(
+          //             borderRadius: BorderRadius.circular(12),
+          //             image: DecorationImage(
+          //               image: AssetImage(posts11[index]['imageUrl']),
+          //               fit: BoxFit.cover,
+          //             ),
+          //           ),
+          //           child: Align(
+          //             alignment: Alignment.bottomCenter,
+          //             child: Container(
+          //               padding: const EdgeInsets.all(8.0),
+          //               color: Colors.black.withOpacity(0.6),
+          //               child: Text(
+          //                 posts11[index]['text'],
+          //                 style: const TextStyle(color: Colors.white),
+          //               ),
+          //             ),
+          //           ),
+          //         ),
+          //       );
+          //     },
+          //   ),
+          // ),
         ],
       ),
     );

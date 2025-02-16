@@ -1,27 +1,41 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:modern_profile/screen/edit_oshi_page.dart';
-import 'package:modern_profile/screen/home_screen.dart';
-import 'package:modern_profile/screen/profile_screen.dart';
+import 'package:video_player/video_player.dart';
+import 'dart:io';
+
+import 'profile_screen.dart';
 
 class SplashScreen extends StatefulWidget {
+  const SplashScreen({super.key});
+
   @override
   _SplashScreenState createState() => _SplashScreenState();
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+  late VideoPlayerController _controller;
+
   @override
   void initState() {
     super.initState();
-    // Timer ให้หน้า SplashScreen อยู่แค่ 3 วินาที
-    Timer(Duration(seconds: 3), () {
-      // หลังจาก 3 วินาที ไปหน้า Home
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (context) => ProfileScreen()),
+    _controller = VideoPlayerController.asset('assets/video/splash_video.mp4')
+      ..initialize().then((_) {
+        setState(() {});
+        _controller.play();
+      });
+
+    Timer(const Duration(seconds: 3), () {
+      Navigator.of(context).pushReplacement(
+        MaterialPageRoute(builder: (context) => const ProfileScreen()),
       );
     });
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
   }
 
   @override
@@ -29,11 +43,12 @@ class _SplashScreenState extends State<SplashScreen> {
     return Scaffold(
       backgroundColor: Colors.white,
       body: Center(
-        child: AnimatedOpacity(
-          opacity: 1.0,
-          duration: Duration(seconds: 2),
-          child: Image.asset('assets/icons/icon_holoplus.png'),
-        ),
+        child: _controller.value.isInitialized
+            ? AspectRatio(
+                aspectRatio: _controller.value.aspectRatio,
+                child: VideoPlayer(_controller),
+              )
+            : const CircularProgressIndicator(),
       ),
     );
   }
