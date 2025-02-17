@@ -26,42 +26,57 @@ class PostCard extends StatefulWidget {
 }
 
 class _PostCardState extends State<PostCard> {
-  late int currentComments; // ✅ เก็บจำนวนคอมเมนต์ที่อัปเดตได้
+  late int currentComments;
+  late int currentLikes;
+  bool isLiked = false;
 
   @override
   void initState() {
     super.initState();
-    currentComments = widget.comments; // กำหนดค่าจำนวนคอมเมนต์เริ่มต้น
+    currentComments = widget.comments;
+    currentLikes = widget.likes;
+  }
+
+  void toggleLike() {
+    setState(() {
+      if (isLiked) {
+        currentLikes--;
+      } else {
+        currentLikes++;
+      }
+      isLiked = !isLiked;
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () async {
-        // สร้าง Map สำหรับ post
         Map<String, dynamic> post = {
           'id': widget.id,
           'username': widget.username,
           'imageUrl': widget.imageUrl,
           'text': widget.text,
           'time': widget.time,
-          'likes': widget.likes,
+          'likes': currentLikes,
           'comments': currentComments,
         };
 
-        final updatedComments = await Navigator.push(
+        final result = await Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => PostDetailPage(
-              post: post, // ส่ง post ไป
-            ),
+            builder: (context) => PostDetailPage(post: post),
           ),
         );
 
-        // ✅ ถ้ามีจำนวนคอมเมนต์อัปเดต ให้ setState เพื่อเปลี่ยนค่า
-        if (updatedComments != null) {
+        if (result != null && result is Map<String, dynamic>) {
+          print(
+              "Updated comments: ${result['comments']}"); // ✅ ตรวจสอบค่าที่ส่งกลับมา
+          print("Updated likes: ${result['likes']}");
+
           setState(() {
-            currentComments = updatedComments;
+            currentComments = result['comments'] ?? currentComments;
+            currentLikes = result['likes'] ?? currentLikes;
           });
         }
       },
@@ -105,17 +120,22 @@ class _PostCardState extends State<PostCard> {
                 children: [
                   Row(
                     children: [
-                      const Icon(Icons.favorite_border, size: 16),
-                      const SizedBox(width: 4),
-                      Text('${widget.likes}'),
+                      IconButton(
+                        icon: Icon(
+                          isLiked ? Icons.favorite : Icons.favorite_border,
+                          color: isLiked ? Colors.red : Colors.black,
+                          size: 20,
+                        ),
+                        onPressed: toggleLike,
+                      ),
+                      Text('$currentLikes'),
                     ],
                   ),
                   Row(
                     children: [
                       const Icon(Icons.comment, size: 16),
                       const SizedBox(width: 4),
-                      Text(
-                          '$currentComments'), // ✅ แสดงจำนวนคอมเมนต์ที่อัปเดตได้
+                      Text('$currentComments'),
                     ],
                   ),
                 ],
