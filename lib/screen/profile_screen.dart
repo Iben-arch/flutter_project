@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:modern_profile/components/profile_img.dart';
-import 'package:modern_profile/components/profile_menu.dart';
-import 'package:modern_profile/constant/constant.dart';
 import 'package:modern_profile/screen/holochat_screen.dart';
 import 'package:modern_profile/screen/holodule_screen.dart';
 import 'package:modern_profile/screen/home_screen.dart';
@@ -16,22 +13,14 @@ class ProfileScreen extends StatefulWidget {
 
 class _ProfileScreenState extends State<ProfileScreen> {
   int _selectedItem = 0;
-  late PageController _pageController;
-  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+  String? _selectedCategory;
 
   void _navigationBottomNavBar(int index) {
     setState(() {
       _selectedItem = index;
-      print(index);
+      _selectedCategory = null; // รีเซ็ตหมวดหมู่เมื่อเปลี่ยนแท็บ
     });
   }
-
-  final List<Widget> _pages = [
-    const HomePage(),
-    HololiveChatScreen(),
-    const HoLoDule(),
-    const EditProfileScreen(),
-  ];
 
   final List<String> _title = ['Home', 'Community', 'Holodule', 'Profile'];
 
@@ -44,7 +33,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         elevation: 0,
         centerTitle: true,
         title: Image.asset(
-          'assets/images/holoplus_logo.png', // Replace with your logo asset
+          'assets/images/holoplus_logo.png',
           height: 40,
         ),
         actions: [
@@ -65,16 +54,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           trailing:
                               const Icon(Icons.verified, color: Colors.blue),
                           onTap: () {
-                            // Handle tap
-                          },
-                        ),
-                        ListTile(
-                          title: const Text('hololive Plus',
-                              style: TextStyle(color: Colors.black)),
-                          trailing:
-                              const Icon(Icons.verified, color: Colors.blue),
-                          onTap: () {
-                            // Handle tap
+                            setState(() {
+                              _selectedItem = 1; // ไปที่หน้า Community
+                              _selectedCategory =
+                                  'Holo News'; // กรองเฉพาะ Holo News
+                            });
+                            Navigator.pop(context);
                           },
                         ),
                         ListTile(
@@ -82,17 +67,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               style: TextStyle(color: Colors.black)),
                           trailing: const Icon(Icons.chat_bubble_outline),
                           onTap: () {
-                            // Handle tap
-                          },
-                        ),
-                        // เพิ่มไอเทมใหม่ในเมนูที่นี่
-                        ListTile(
-                          title: const Text('New Menu Item',
-                              style: TextStyle(color: Colors.black)),
-                          trailing: const Icon(Icons.new_releases,
-                              color: Colors.orange),
-                          onTap: () {
-                            // Handle tap
+                            setState(() {
+                              _selectedItem = 1; // ไปที่หน้า Community
+                              _selectedCategory = null; // แสดงทุกโพสต์
+                            });
+                            Navigator.pop(context);
                           },
                         ),
                       ],
@@ -104,20 +83,24 @@ class _ProfileScreenState extends State<ProfileScreen> {
           ),
         ],
       ),
-      body: _pages[_selectedItem],
+      body: _selectedItem == 1
+          ? HololiveChatScreen(
+              category: _selectedCategory,
+            ) // ✅ ส่งค่า category ไปยัง HololiveChatScreen
+          : _selectedItem == 0
+              ? const HomePage()
+              : _selectedItem == 2
+                  ? const HoLoDule()
+                  : const EditProfileScreen(),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _selectedItem,
         onTap: _navigationBottomNavBar,
         type: BottomNavigationBarType.fixed,
         items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-              icon: Icon(
-                Icons.home,
-              ),
-              label: 'Home'),
+          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
           BottomNavigationBarItem(icon: Icon(Icons.chat), label: 'Community'),
           BottomNavigationBarItem(
-              icon: Icon(Icons.video_collection), label: 'holodule'),
+              icon: Icon(Icons.video_collection), label: 'Holodule'),
           BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile')
         ],
         selectedItemColor: Colors.blue,
